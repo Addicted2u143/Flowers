@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>🌸 Nicole's Delivery Run</title>
+<title>🌸 Nicole's Delivery Run 2</title>
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 :root {
@@ -46,14 +46,14 @@ header h1 { font-size:1rem; font-weight:700; letter-spacing:.08em; text-align:ce
 .order-line { font-size:.7rem; font-family:monospace; color:#888; margin-bottom:10px; }
 .badges { display:flex; flex-wrap:wrap; gap:5px; margin-bottom:10px; }
 .badge { font-size:.62rem; font-weight:700; padding:3px 9px; border-radius:20px; color:white; }
-.b-apt    { background:#7d3c98; }
-.b-nh     { background:#0e6655; }
-.b-time   { background:#c0392b; }
-.b-flex   { background:#717d7e; }
-.b-card   { background:#1a5276; }
-.b-fruit  { background:#ca6f1e; }
-.b-flowers{ background:#e74c3c; }
+.b-apt  { background:#7d3c98; }
+.b-biz  { background:#1a5276; }
+.b-time { background:#c0392b; }
+.b-card { background:#1a5276; }
+.b-novase { background:#6d4c41; }
+.b-dd   { background:#2e7d32; }
 .special-note { font-size:.75rem; font-weight:700; color:#c0392b; background:#fdf0ef; border-left:3px solid #c0392b; padding:6px 10px; border-radius:0 7px 7px 0; margin-bottom:10px; }
+.info-note { font-size:.75rem; font-weight:700; color:#1a5276; background:#eaf4fb; border-left:3px solid #1a5276; padding:6px 10px; border-radius:0 7px 7px 0; margin-bottom:10px; }
 .product-box { font-size:.75rem; background:#f8f8f8; border:1px solid #e0e0e0; border-radius:8px; padding:8px 10px; margin-bottom:10px; line-height:1.6; font-family:monospace; color:#444; }
 .action-btns { display:grid; grid-template-columns:1fr 1fr 1fr; gap:7px; margin-bottom:10px; }
 .abtn { display:block; padding:12px 4px; border-radius:9px; text-align:center; text-decoration:none; font-size:.7rem; font-weight:700; letter-spacing:.04em; border:none; cursor:pointer; transition:opacity .15s,transform .1s; }
@@ -104,9 +104,9 @@ header h1 { font-size:1rem; font-weight:700; letter-spacing:.08em; text-align:ce
 </head>
 <body>
 <header>
-  <h1>🌸 NICOLE'S DELIVERY RUN</h1>
-  <div class="run-meta">THURSDAY, MAY 7, 2026 &middot; 23 STOPS &middot; ZONE 2B · SURPRISE / SUN CITY, AZ</div>
-  <div class="counter" id="counter">0 of 23 complete</div>
+  <h1>🌸 NICOLE'S DELIVERY RUN 2</h1>
+  <div class="run-meta">THURSDAY, MAY 7, 2026 · TRIP 5962331 · 10 STOPS · PHOENIX / LAVEEN, AZ</div>
+  <div class="counter" id="counter">0 of 10 complete</div>
   <div class="controls">
     <button class="ctrl-btn" onclick="expandAll()">EXPAND ALL</button>
     <button class="ctrl-btn" onclick="collapseAll()">COLLAPSE ALL</button>
@@ -130,221 +130,96 @@ header h1 { font-size:1rem; font-weight:700; letter-spacing:.08em; text-align:ce
 <script>
 var stops = [
   {
-    num:1, name:"JACKIE GUYER",
-    addr:"16501 N El Mirage Rd, Lot 820\nSurprise, AZ 85378",
-    phone:"6239751666", type:"Residential",
-    order:"BMT #43004124 · Order #46640645",
-    product:"Always on My Mind-XL: 8\" GthrVse, RoseP...\nCard Isle Personalized Sku",
-    badges:["card"], special:null,
-    flex:false, notes_pre:"CARD ISLE ID: UBCS5"
-  },
-  {
-    num:2, name:"MARILYN CRAFT",
-    addr:"13414 W Ironwood St\nSurprise, AZ 85374",
-    phone:"4803359780", type:"Residential",
-    order:"BMT #43119262 · Order #46668808",
-    product:"Floral Embrace-SM: 5\" Cyl, AstcLilOrg, S...",
-    badges:["flex"], special:"📅 FLEX — FRI 5/8 PREFERRED · THU 5/7–FRI 5/8 ACCEPTABLE",
-    flex:true, notes_pre:null
-  },
-  {
-    num:3, name:"DANA JACKSON",
-    addr:"13601 W Caribbean Ln\nSurprise, AZ 85379",
-    phone:"6024104840", type:"Residential",
-    order:"BMT #43373553 · Order #46723086",
-    product:"Mother's Embrace-SM: RoseVse, #9PkRi...",
-    badges:[], special:null,
-    flex:false, notes_pre:null
-  },
-  {
-    num:4, name:"POLLY PHILLIPS",
-    addr:"13563 N 145th Dr\nSurprise, AZ 85379",
-    phone:"6233373797", type:"Residential",
-    order:"BMT #43364303 · Order #46721631",
-    product:"Fields of Europe Spring MD: 8\" RseVse, R...",
-    badges:["flex"], special:"📅 FLEX — FRI 5/8 PREFERRED · THU 5/7–FRI 5/8 ACCEPTABLE",
-    flex:true, notes_pre:null
-  },
-  {
-    num:5, name:"MANDY SIEWERTSEN",
-    addr:"14645 W Georgia Dr\nSurprise, AZ 85379",
-    phone:"4808228634", type:"Residential",
-    order:"BMT #42832462 · Order #46600807",
-    product:"*BUNDLE* LAVENDER GARDEN IN CLEAR 8...",
-    badges:["fruit"], special:null,
-    flex:false, notes_pre:"FRUIT AND FLOWERS"
-  },
-  {
-    num:6, name:"MYRNA HINKEL",
-    addr:"15510 N La Cometa, Apt 3413\nSurprise, AZ 85374",
-    phone:"2066509614", type:"Apartment",
-    order:"BMT #43414364 · Order #46728348",
-    product:"Designer Dreams Bqt-MD: PkBagVse, Foa...",
-    badges:["apt","flex"], special:"📅 FLEX — FRI 5/8 PREFERRED · THU 5/7–FRI 5/8 ACCEPTABLE",
-    flex:true, notes_pre:null
-  },
-  {
-    num:7, name:"JAN LEIKVOLL",
-    addr:"13973 W Pueblo Trl\nSurprise, AZ 85374",
-    phone:"6028269940", type:"Residential",
-    order:"BMT #42643110 · Order #46542230",
-    product:"*BUNDLE* LAVENDER GARDEN IN CLEAR 8...\nCard Isle Personalized Sku — Fruit Box",
-    badges:["card","fruit"], special:null,
-    flex:false, notes_pre:"CARD ISLE ID: BKTX7"
-  },
-  {
-    num:8, name:"KARLA REED",
-    addr:"Holiday Vista de la Montaña\n18510 N Parkview Pl\nSun City, AZ 85374",
-    phone:"6232021972", type:"Nursing Home",
-    order:"BMT #43367794 · Order #46722164",
-    product:"Floral Embrace-MD: 5\" Cyl, RoseHtPk, Ast...\nCard Isle Personalized Sku",
-    badges:["nh","flex","card"], special:"🏥 NURSING HOME — check in at front desk\n📅 FLEX — FRI 5/8 PREFERRED · THU 5/7–FRI 5/8 ACCEPTABLE",
-    flex:true, notes_pre:"CARD ISLE ID: 2HS76"
-  },
-  {
-    num:9, name:"BARBARA SCHAPS",
-    addr:"13442 W Ashwood Dr\nSun City West, AZ 85375",
-    phone:"3039818935", type:"Residential",
-    order:"BMT #42888512 · Order #46613809",
-    product:"*BUNDLE* PREMADE LG FIELDS OF EUROPE...",
-    badges:["flowers"], special:null,
-    flex:false, notes_pre:"FLOWERS AND BERRIES"
-  },
-  {
-    num:10, name:"SHIRLEY KROG",
-    addr:"12815 W Crystal Lake Dr\nSun City West, AZ 85375",
-    phone:"6232973807", type:"Residential",
-    order:"BMT #42863571 · Order #46608212",
-    product:"*BUNDLE* LAVENDER GARDEN+VASE + 6CT D...",
-    badges:["fruit"], special:null,
-    flex:false, notes_pre:"FRUIT AND FLOWERS"
-  },
-  {
-    num:11, name:"MARY MATHIASON",
-    addr:"13328 W Crown Ridge Dr\nSun City West, AZ 85375",
-    phone:"6236942582", type:"Residential",
-    order:"BMT #43404039 · Order #46726571",
-    product:"Spring Sentiment Bqt-MD: RstcCbe, Foa...",
-    badges:["flex"], special:"📅 FLEX — FRI 5/8 PREFERRED · THU 5/7–FRI 5/8 ACCEPTABLE",
-    flex:true, notes_pre:null
-  },
-  {
-    num:12, name:"JUDI DILLARD",
-    addr:"13921 W Elmbrook Dr\nSun City West, AZ 85375",
-    phone:"6237340074", type:"Residential",
-    order:"BMT #43371886 · Order #46722814",
-    product:"Floral Embrace-MD: 5\" Cyl, RoseHtPk, Ast...",
-    badges:["flex"], special:"📅 FLEX — FRI 5/8 PREFERRED · THU 5/7–FRI 5/8 ACCEPTABLE",
-    flex:true, notes_pre:null
-  },
-  {
-    num:13, name:"SHIRLEY MELLUM",
-    addr:"14627 W Futura Dr\nSun City West, AZ 85375",
-    phone:"6236409677", type:"Residential",
-    order:"BMT #42930503 · Order #46622090",
-    product:"*BUNDLE* LAVENDER GARDEN IN CLEAR 8...",
-    badges:["flowers"], special:null,
-    flex:false, notes_pre:"FLOWERS AND BERRIES"
-  },
-  {
-    num:14, name:"MARIAN HAMMAN",
-    addr:"21868 N Montego Dr\nSun City West, AZ 85375",
-    phone:"4252690258", type:"Residential",
-    order:"BMT #43357157 · Order #46720477",
-    product:"Floral Embrace-MD: 5\" Cyl, RoseHtPk, Ast...",
-    badges:["flex"], special:"📅 FLEX — FRI 5/8 PREFERRED · THU 5/7–FRI 5/8 ACCEPTABLE",
-    flex:true, notes_pre:null
-  },
-  {
-    num:15, name:"PAT CRAMER",
-    addr:"14434 W Gunsight Dr\nSun City West, AZ 85375",
-    phone:"4804501678", type:"Residential",
-    order:"BMT #43432664 · Order #46732548",
+    num:1, name:"DESTINEE KILE",
+    addr:"5624 S 6th St, Apt 2\nPhoenix, AZ 85040",
+    phone:"6236959809", type:"Apartment",
+    order:"BMT #43427756 · Order #46731408 · Zone 7B",
     product:"Floral Embrace-LG: 6\" Cyl, RoseHtPk, Ast...",
-    badges:["flex"], special:"📅 FLEX — FRI 5/8 PREFERRED · THU 5/7–FRI 5/8 ACCEPTABLE",
-    flex:true, notes_pre:null
+    badges:["apt"], special:null, notes_pre:null
   },
   {
-    num:16, name:"BONNIE GARIEPY",
-    addr:"15801 W Huron Dr\nSun City West, AZ 85375",
-    phone:"5033809872", type:"Residential",
-    order:"BMT #43372449 · Order #46722900",
-    product:"Floral Embrace-MD: 5\" Cyl, RoseHtPk, Ast...",
-    badges:[], special:null,
-    flex:false, notes_pre:null
+    num:2, name:"ASHLEY GRANT",
+    addr:"4725 W South Mountain Rd\nLaveen, AZ 85339",
+    phone:"6028314659", type:"Residential",
+    order:"BMT #43353323 · Order #46719802 · Zone 3B",
+    product:"Daydream Bouquet-MD: LavGlsVse, RoseP...",
+    badges:[], special:null, notes_pre:null
   },
   {
-    num:17, name:"JANINE SUMMERS",
-    addr:"21314 N Limousine Dr\nSun City West, AZ 85375",
-    phone:"6232668343", type:"Residential",
-    order:"BMT #42998938 · Order #46639290",
-    product:"Always on My Mind-XL: 8\" GthrVse, RoseP...",
-    badges:[], special:null,
-    flex:false, notes_pre:null
+    num:3, name:"SANDRA VALLE",
+    addr:"5754 W Gwen St\nLaveen, AZ 85339",
+    phone:"4803864903", type:"Residential",
+    order:"BMT #43467550 · Order #46741738 · Zone 3B",
+    product:"Lavender & White Peace, Prayers & Ble...\nCard Isle Personalized Sku",
+    badges:["card"], special:null, notes_pre:"CARD ISLE ID: DE464"
   },
   {
-    num:18, name:"CAROL HOPMAN",
-    addr:"15535 W Agua Linda Ln\nSurprise, AZ 85374",
-    phone:"2069992369", type:"Residential",
-    order:"BMT #43131827 · Order #46672103",
+    num:4, name:"JANOONIE GELINAS",
+    addr:"8105 S 73rd Dr\nLaveen, AZ 85339",
+    phone:"6237030361", type:"Residential",
+    order:"BMT #42300894 · Order #46418323 · Zone 3B",
+    product:"**BUNDLE** Celebrate the Day-SM: Celeb...\nCard Isle Personalized Sku",
+    badges:["card"], special:null, notes_pre:"CARD ISLE ID: AKSKG 1 HBD"
+  },
+  {
+    num:5, name:"LUZ CHACON",
+    addr:"7021 W St Catherine Ave\nLaveen, AZ 85339",
+    phone:"4803697466", type:"Residential",
+    order:"BMT #43510275 · Order #46754521 · Zone 3B",
+    product:"**NO VASE** — Bouquet Only in Kraft Paper...",
+    badges:["novase"], special:"⚠️ NO VASE — Bouquet only in Kraft Paper. Verify before door.",
+    notes_pre:null
+  },
+  {
+    num:6, name:"GABRIELLE BARBOSA",
+    addr:"6037 W Wood St\nPhoenix, AZ 85043",
+    phone:"6024996451", type:"Residential",
+    order:"BMT #43452175 · Order #46737741 · Zone 3B-DD",
+    product:"Floral Embrace-SM: 5\" Cyl, AstcLilOrg, S...",
+    badges:["dd"], special:null, notes_pre:null
+  },
+  {
+    num:7, name:"CYNTHIA RAMIREZ McLANE",
+    addr:"7600 W Roosevelt St\nPhoenix, AZ 85043",
+    phone:"6235479558", type:"Business",
+    order:"BMT #43381590 · Order #46724241 · Zone 3B-DD",
+    product:"Mother's Embrace-XL: PkCeramicVse(N...",
+    badges:["biz","time"], special:"⏰ DELIVER BEFORE 5 PM — Business location, call ahead",
+    notes_pre:null
+  },
+  {
+    num:8, name:"NORMA GUEBARA",
+    addr:"3139 N 77th Ln\nPhoenix, AZ 85033",
+    phone:"4803096165", type:"Residential",
+    order:"BMT #43460516 · Order #46739887 · Zone 3B-DD",
+    product:"Fields of Europe Spring MD: 8\" RseVse, R...",
+    badges:["dd"], special:null, notes_pre:null
+  },
+  {
+    num:9, name:"SANDY BISHOP",
+    addr:"4239 N 67th Ln\nPhoenix, AZ 85033",
+    phone:"6236945152", type:"Residential",
+    order:"BMT #43280435 · Order #46705354 · Zone 3B-DD",
+    product:"Daydream Bouquet-MD: LavGlsVse, RoseP...\nCard Isle Personalized Sku",
+    badges:["card","dd"], special:null, notes_pre:"CARD ISLE ID: MH3BY"
+  },
+  {
+    num:10, name:"ANITA WILLIAMS",
+    addr:"5332 W Vernon Ave\nPhoenix, AZ 85035",
+    phone:"6023806440", type:"Residential",
+    order:"BMT #43467253 · Order #46741569 · Zone 3B",
     product:"Honey Bee Buzz for Spring-LG: BeeVse,...",
-    badges:["flex"], special:"📅 FLEX — FRI 5/8 PREFERRED · THU 5/7–FRI 5/8 ACCEPTABLE",
-    flex:true, notes_pre:null
-  },
-  {
-    num:19, name:"KAY SAWATZKI",
-    addr:"17431 N Thoroughbred Dr\nSurprise, AZ 85374",
-    phone:"9038196298", type:"Residential",
-    order:"BMT #43202919 · Order #46687509",
-    product:"Honey Bee Buzz for Spring-LG: BeeVse,...",
-    badges:[], special:null,
-    flex:false, notes_pre:null
-  },
-  {
-    num:20, name:"JOIE VALDEZ",
-    addr:"16161 W Davis Rd\nSun City, AZ 85374",
-    phone:"4805896560", type:"Residential",
-    order:"BMT #43389872 · Order #46724787",
-    product:"Daydream Bouquet-LG: LavGlsVse, RoseP...",
-    badges:[], special:null,
-    flex:false, notes_pre:null
-  },
-  {
-    num:21, name:"MICHELLE FERNANDEZ",
-    addr:"16630 N Reems Rd, Apt 1064\nSurprise, AZ 85374",
-    phone:"9092292249", type:"Apartment",
-    order:"BMT #43219228 · Order #46691082",
-    product:"Lovely Lavender Medley-MD: 5\" Cyl, Rose...\nCard Isle Personalized Sku",
-    badges:["apt","flex","card"], special:"📅 FLEX — FRI 5/8 PREFERRED · THU 5/7–FRI 5/8 ACCEPTABLE",
-    flex:true, notes_pre:"CARD ISLE ID: 9KHJ9"
-  },
-  {
-    num:22, name:"GERI DUNN",
-    addr:"17647 SW Skyline Dr\nSurprise, AZ 85374",
-    phone:"9714096030", type:"Residential",
-    order:"BMT #43240894 · Order #46696310",
-    product:"Vibrant Floral Medley-XL: 8\" GthrVse, R...",
-    badges:["flex"], special:"📅 FLEX — FRI 5/8 PREFERRED · THU 5/7–FRI 5/8 ACCEPTABLE",
-    flex:true, notes_pre:null
-  },
-  {
-    num:23, name:"LINDA REPSHER",
-    addr:"17958 W Deneen Way\nSurprise, AZ 85374",
-    phone:"9704563194", type:"Residential",
-    order:"BMT #43368434 · Order #46722279",
-    product:"Designer Dreams Bqt-SM: PkBagVse, Foa...",
-    badges:[], special:null,
-    flex:false, notes_pre:null
+    badges:[], special:null, notes_pre:null
   }
 ];
 
 var badgeDefs = {
-  apt:     { cls:"b-apt",    label:"🏠 APARTMENT" },
-  nh:      { cls:"b-nh",     label:"🏥 NURSING HOME" },
-  flex:    { cls:"b-flex",   label:"📅 FLEX DELIVERY" },
-  card:    { cls:"b-card",   label:"💌 CARD ISLE" },
-  fruit:   { cls:"b-fruit",  label:"🍓 FRUIT INCLUDED" },
-  flowers: { cls:"b-flowers",label:"💐 FLOWERS & BERRIES" }
+  apt:    { cls:"b-apt",   label:"🏠 APARTMENT" },
+  biz:    { cls:"b-biz",   label:"🏢 BUSINESS" },
+  time:   { cls:"b-time",  label:"⏰ BEFORE 5 PM" },
+  card:   { cls:"b-card",  label:"💌 CARD ISLE" },
+  novase: { cls:"b-novase",label:"🚫 NO VASE" },
+  dd:     { cls:"b-dd",    label:"📍 ZONE DD" }
 };
 
 var state = {};
@@ -354,7 +229,6 @@ function phxTime() {
   return new Date().toLocaleTimeString('en-US',{timeZone:'America/Phoenix',hour:'numeric',minute:'2-digit',hour12:true});
 }
 function navUrl(addr) { return 'https://maps.apple.com/?q='+encodeURIComponent(addr.replace(/\n/g,', ')); }
-
 function updateProgress() {
   var done=0; stops.forEach(function(s){if(state[s.num].outcome)done++;});
   document.getElementById('prog').style.width=((done/stops.length)*100)+'%';
@@ -434,7 +308,7 @@ function buildCards() {
     var badgesHtml='';
     stop.badges.forEach(function(b){var bd=badgeDefs[b];badgesHtml+='<span class="badge '+bd.cls+'">'+bd.label+'</span>';});
     var specialHtml=stop.special?'<div class="special-note">'+stop.special+'</div>':'';
-    var preNoteHtml=stop.notes_pre?'<div class="special-note" style="color:#1a5276;background:#eaf4fb;border-color:#1a5276;">ℹ️ '+stop.notes_pre+'</div>':'';
+    var preNoteHtml=stop.notes_pre?'<div class="info-note">ℹ️ '+stop.notes_pre+'</div>':'';
     var card=document.createElement('div');
     card.className='card collapsed'; card.id='c'+stop.num;
     card.innerHTML=
@@ -442,7 +316,7 @@ function buildCards() {
         '<div class="stop-num">'+stop.num+'</div>'+
         '<div class="stop-info">'+
           '<div class="stop-name">'+stop.name+'</div>'+
-          '<div class="stop-sub">'+stop.type+'</div>'+
+          '<div class="stop-sub">'+stop.type+' · '+stop.order.split('·')[2].trim()+'</div>'+
         '</div>'+
         '<span class="otag" id="otag'+stop.num+'"></span>'+
         '<div class="chev">▼</div>'+
@@ -469,7 +343,7 @@ function buildCards() {
         '</div>'+
         '<div class="ts-line" id="ts'+stop.num+'"></div>'+
         '<div class="notes-label">NOTES / GATE CODE / RESPONSE</div>'+
-        '<textarea class="notes-in" id="notes'+stop.num+'" rows="2" placeholder="Gate code, building #, directions, recipient notes..." oninput="saveNotes('+stop.num+')"></textarea>'+
+        '<textarea class="notes-in" id="notes'+stop.num+'" rows="2" placeholder="Gate code, unit #, directions..." oninput="saveNotes('+stop.num+')"></textarea>'+
         '<textarea class="undeliv-in" id="ur'+stop.num+'" rows="2" placeholder="Reason undeliverable..." oninput="saveReason('+stop.num+')"></textarea>'+
       '</div>';
     wrap.appendChild(card);
