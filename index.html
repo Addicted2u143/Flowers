@@ -6,271 +6,115 @@
 <title>🌸 Nicole's Delivery Run</title>
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-
 :root {
-  --red: #c0392b;
-  --yellow: #d4860a;
-  --green: #1e8449;
-  --blue: #1a5276;
-  --red-bg: #fdf0ef;
-  --yellow-bg: #fef9f0;
-  --green-bg: #edfaf1;
-  --blue-bg: #eaf4fb;
-  --text: #1a1a1a;
-  --sub: #666;
+  --red: #c0392b; --yellow: #d4860a; --green: #1e8449; --blue: #1a5276;
+  --red-bg: #fdf0ef; --yellow-bg: #fef9f0; --green-bg: #edfaf1; --blue-bg: #eaf4fb;
+  --text: #1a1a1a; --sub: #666;
 }
-
-body {
-  font-family: -apple-system, 'Helvetica Neue', sans-serif;
-  background: #eee9e3;
-  padding-bottom: 60px;
-}
-
-header {
-  background: #1a1a2e;
-  color: white;
-  padding: 14px 12px 0;
-  position: sticky;
-  top: 0;
-  z-index: 200;
-  box-shadow: 0 3px 14px rgba(0,0,0,0.4);
-}
-header h1 { font-size: 1rem; font-weight: 700; letter-spacing: .08em; text-align: center; }
-.run-meta { font-size: .68rem; opacity: .6; text-align: center; margin-top: 2px; font-family: monospace; }
-.counter { text-align: center; font-size: .7rem; color: rgba(255,255,255,.65); font-family: monospace; margin: 5px 0 7px; }
-
-.controls { display: flex; gap: 5px; padding: 7px 0 10px; }
-.ctrl-btn {
-  flex: 1; padding: 8px 2px;
-  border: 1px solid rgba(255,255,255,.25);
-  background: rgba(255,255,255,.07);
-  color: white; border-radius: 7px;
-  font-size: .6rem; font-weight: 600;
-  cursor: pointer; letter-spacing: .03em;
-}
-.ctrl-btn:active { background: rgba(255,255,255,.2); }
-.ctrl-btn.green { background: rgba(39,174,96,.25); border-color: #27ae60; }
-.ctrl-btn.danger { background: rgba(192,57,43,.25); border-color: #c0392b; }
-
-.progress-bar { height: 4px; background: rgba(255,255,255,.15); }
-.progress-fill { height: 100%; background: linear-gradient(90deg,#27ae60,#58d68d); transition: width .4s; width: 0%; }
-
-.stops-wrap { padding: 10px 10px 0; display: flex; flex-direction: column; gap: 10px; }
-
-.card {
-  border-radius: 13px; border: 2px solid #d5cfc8;
-  background: white; overflow: hidden;
-  box-shadow: 0 1px 5px rgba(0,0,0,.08);
-  transition: border-color .25s, background .25s;
-}
-.card.s-yellow   { border-color: var(--yellow); background: var(--yellow-bg); }
-.card.s-delivered{ border-color: var(--green);  background: var(--green-bg); }
-.card.s-lop      { border-color: var(--blue);   background: var(--blue-bg); }
-.card.s-undeliv  { border-color: var(--red);    background: var(--red-bg); }
-
-.card-head {
-  display: flex; align-items: center;
-  padding: 11px 12px; gap: 9px;
-  cursor: pointer; user-select: none;
-}
-.stop-num  { font-size: 1rem; font-weight: 800; color: #999; min-width: 22px; font-family: monospace; }
-.stop-info { flex: 1; min-width: 0; }
-.stop-name { font-size: .9rem; font-weight: 700; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.stop-sub  { font-size: .62rem; color: var(--sub); font-family: monospace; margin-top: 1px; }
-
-.otag { font-size: .6rem; font-weight: 700; padding: 3px 7px; border-radius: 20px; color: white; white-space: nowrap; flex-shrink: 0; }
-.otag-delivered { background: var(--green); }
-.otag-lop       { background: var(--blue); }
-.otag-undeliv   { background: var(--red); }
-.otag-texted    { background: var(--yellow); }
-
-.chev { font-size: .75rem; color: #bbb; transition: transform .25s; flex-shrink: 0; }
-.card.collapsed .chev { transform: rotate(-90deg); }
-
-.card-body { padding: 0 12px 13px; border-top: 1px solid rgba(0,0,0,.06); }
-.card.collapsed .card-body { display: none; }
-
-.addr { font-size: .8rem; color: var(--sub); font-family: monospace; line-height: 1.55; margin: 9px 0 10px; white-space: pre-line; }
-
-.badges { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 10px; }
-.badge { font-size: .62rem; font-weight: 700; padding: 3px 9px; border-radius: 20px; color: white; }
-.b-apt    { background: #7d3c98; }
-.b-biz    { background: #1a5276; }
-.b-church { background: #0e6655; }
-.b-time   { background: #c0392b; }
-.b-addon  { background: #ca6f1e; }
-.b-flex   { background: #717d7e; }
-
-.special-note {
-  font-size: .75rem; font-weight: 700;
-  color: #c0392b; background: #fdf0ef;
-  border-left: 3px solid #c0392b;
-  padding: 6px 10px; border-radius: 0 7px 7px 0;
-  margin-bottom: 10px;
-}
-
-.action-btns { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 7px; margin-bottom: 10px; }
-.abtn {
-  display: block; padding: 12px 4px;
-  border-radius: 9px; text-align: center;
-  text-decoration: none; font-size: .7rem;
-  font-weight: 700; letter-spacing: .04em;
-  border: none; cursor: pointer;
-  transition: opacity .15s, transform .1s;
-}
-.abtn:active { opacity: .75; transform: scale(.97); }
-.abtn-nav  { background: #1a1a2e; color: white; }
-.abtn-text { background: #1e8449; color: white; }
-.abtn-call { background: #1a5276; color: white; }
-
-.status-row { display: flex; gap: 6px; margin-bottom: 10px; }
-.sbtn {
-  flex: 1; padding: 8px 3px; border-radius: 8px;
-  border: 2px solid transparent; font-size: .62rem;
-  font-weight: 700; cursor: pointer; transition: all .18s;
-  letter-spacing: .03em; text-align: center;
-}
-.sbtn-y { background: #fef3e2; color: var(--yellow); border-color: var(--yellow); }
-.sbtn-y.active { background: var(--yellow); color: white; }
-
-.outcome-label { font-size: .65rem; font-weight: 700; color: var(--sub); letter-spacing: .06em; text-transform: uppercase; margin-bottom: 6px; font-family: monospace; }
-.outcome-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; margin-bottom: 10px; }
-.obtn {
-  padding: 11px 4px; border-radius: 9px;
-  border: 2px solid transparent; font-size: .65rem;
-  font-weight: 700; cursor: pointer; text-align: center;
-  transition: all .18s; line-height: 1.3;
-}
-.obtn:active { transform: scale(.96); }
-.obtn-d { background: #eafaf1; color: var(--green); border-color: var(--green); }
-.obtn-d.active { background: var(--green); color: white; }
-.obtn-l { background: #eaf4fb; color: var(--blue); border-color: var(--blue); }
-.obtn-l.active { background: var(--blue); color: white; }
-.obtn-u { background: #fdf0ef; color: var(--red); border-color: var(--red); }
-.obtn-u.active { background: var(--red); color: white; }
-
-.ts-line { font-size: .68rem; font-family: monospace; font-weight: 700; margin-bottom: 8px; display: none; }
-.ts-line.show { display: block; }
-.ts-d { color: var(--green); }
-.ts-l { color: var(--blue); }
-.ts-u { color: var(--red); }
-
-.notes-label { font-size: .65rem; font-weight: 700; color: var(--sub); letter-spacing: .06em; text-transform: uppercase; margin-bottom: 4px; font-family: monospace; }
-.notes-in {
-  width: 100%; padding: 8px 10px;
-  border: 1px solid #ddd; border-radius: 8px;
-  font-size: .82rem; background: rgba(255,255,255,.85);
-  color: var(--text); resize: none;
-  font-family: monospace; line-height: 1.45; margin-bottom: 7px;
-}
-.notes-in:focus { outline: none; border-color: #aaa; background: white; }
-
-.undeliv-in {
-  display: none; width: 100%; padding: 8px 10px;
-  border: 1px solid var(--red); border-radius: 8px;
-  font-size: .82rem; background: #fff8f8;
-  color: var(--text); resize: none;
-  font-family: monospace; line-height: 1.45;
-}
-.undeliv-in.show { display: block; }
-.undeliv-in:focus { outline: none; }
-
-.save-indicator {
-  font-size: .6rem; font-family: monospace;
-  color: var(--green); text-align: right;
-  margin-top: 4px; height: 14px;
-  transition: opacity .3s;
-}
-
-/* SUMMARY */
-.summary-section {
-  margin: 16px 10px 0;
-  border-radius: 13px; overflow: hidden;
-  border: 2px solid #1a1a2e; background: white;
-  box-shadow: 0 2px 10px rgba(0,0,0,.1);
-}
-.summary-head { background: #1a1a2e; color: white; padding: 13px 14px; text-align: center; }
-.summary-head h2 { font-size: .9rem; letter-spacing: .08em; }
-.summary-head p  { font-size: .68rem; opacity: .6; margin-top: 3px; font-family: monospace; }
-
-.sum-group-title {
-  font-size: .65rem; font-weight: 700;
-  letter-spacing: .08em; text-transform: uppercase;
-  color: white; padding: 6px 14px; font-family: monospace;
-}
-.sg-delivered { background: var(--green); }
-.sg-lop       { background: var(--blue); }
-.sg-undeliv   { background: var(--red); }
-.sg-pending   { background: #888; }
-
-.sum-row {
-  display: flex; align-items: flex-start;
-  padding: 10px 14px; border-bottom: 1px solid #f0f0f0; gap: 10px;
-}
-.sum-row:last-child { border-bottom: none; }
-.sum-num  { font-size: .78rem; font-weight: 800; color: #aaa; min-width: 20px; font-family: monospace; padding-top: 1px; }
-.sum-info { flex: 1; }
-.sum-name { font-size: .82rem; font-weight: 700; color: var(--text); }
-.sum-time { font-size: .68rem; font-family: monospace; color: var(--sub); margin-top: 2px; }
-.sum-note { font-size: .68rem; font-family: monospace; color: #888; margin-top: 2px; font-style: italic; }
-.sum-tag  { font-size: .6rem; font-weight: 700; padding: 3px 8px; border-radius: 20px; color: white; white-space: nowrap; flex-shrink: 0; }
-.st-d { background: var(--green); }
-.st-l { background: var(--blue); }
-.st-u { background: var(--red); }
-.st-p { background: #aaa; }
-
-.refresh-btn {
-  display: block; width: calc(100% - 24px);
-  margin: 12px auto; padding: 12px;
-  background: #1a1a2e; color: white;
-  border: none; border-radius: 10px;
-  font-size: .8rem; font-weight: 700;
-  cursor: pointer; letter-spacing: .05em; text-align: center;
-}
-.refresh-btn:active { opacity: .8; }
-
-/* RESET CONFIRM MODAL */
-.modal-overlay {
-  display: none; position: fixed; inset: 0;
-  background: rgba(0,0,0,.6); z-index: 500;
-  align-items: center; justify-content: center;
-}
-.modal-overlay.show { display: flex; }
-.modal-box {
-  background: white; border-radius: 16px;
-  padding: 24px 20px; margin: 20px;
-  text-align: center; max-width: 320px; width: 100%;
-}
-.modal-box h3 { font-size: .95rem; margin-bottom: 10px; color: var(--text); }
-.modal-box p  { font-size: .78rem; color: var(--sub); margin-bottom: 20px; line-height: 1.5; }
-.modal-btns { display: flex; gap: 10px; }
-.modal-btn {
-  flex: 1; padding: 12px; border-radius: 10px;
-  border: none; font-size: .8rem; font-weight: 700;
-  cursor: pointer; letter-spacing: .03em;
-}
-.modal-btn-cancel { background: #eee; color: var(--text); }
-.modal-btn-confirm { background: var(--red); color: white; }
+body { font-family: -apple-system,'Helvetica Neue',sans-serif; background:#eee9e3; padding-bottom:60px; }
+header { background:#1a1a2e; color:white; padding:14px 12px 0; position:sticky; top:0; z-index:200; box-shadow:0 3px 14px rgba(0,0,0,.4); }
+header h1 { font-size:1rem; font-weight:700; letter-spacing:.08em; text-align:center; }
+.run-meta { font-size:.68rem; opacity:.6; text-align:center; margin-top:2px; font-family:monospace; }
+.counter { text-align:center; font-size:.7rem; color:rgba(255,255,255,.65); font-family:monospace; margin:5px 0 7px; }
+.controls { display:flex; gap:5px; padding:7px 0 10px; }
+.ctrl-btn { flex:1; padding:8px 2px; border:1px solid rgba(255,255,255,.25); background:rgba(255,255,255,.07); color:white; border-radius:7px; font-size:.6rem; font-weight:600; cursor:pointer; letter-spacing:.03em; }
+.ctrl-btn:active { background:rgba(255,255,255,.2); }
+.ctrl-btn.green { background:rgba(39,174,96,.25); border-color:#27ae60; }
+.progress-bar { height:4px; background:rgba(255,255,255,.15); }
+.progress-fill { height:100%; background:linear-gradient(90deg,#27ae60,#58d68d); transition:width .4s; width:0%; }
+.stops-wrap { padding:10px 10px 0; display:flex; flex-direction:column; gap:10px; }
+.card { border-radius:13px; border:2px solid #d5cfc8; background:white; overflow:hidden; box-shadow:0 1px 5px rgba(0,0,0,.08); transition:border-color .25s,background .25s; }
+.card.s-yellow  { border-color:var(--yellow); background:var(--yellow-bg); }
+.card.s-delivered { border-color:var(--green); background:var(--green-bg); }
+.card.s-lop     { border-color:var(--blue);  background:var(--blue-bg); }
+.card.s-undeliv { border-color:var(--red);   background:var(--red-bg); }
+.card-head { display:flex; align-items:center; padding:11px 12px; gap:9px; cursor:pointer; user-select:none; }
+.stop-num { font-size:1rem; font-weight:800; color:#999; min-width:22px; font-family:monospace; }
+.stop-info { flex:1; min-width:0; }
+.stop-name { font-size:.9rem; font-weight:700; color:var(--text); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.stop-sub  { font-size:.62rem; color:var(--sub); font-family:monospace; margin-top:1px; }
+.otag { font-size:.6rem; font-weight:700; padding:3px 7px; border-radius:20px; color:white; white-space:nowrap; flex-shrink:0; }
+.otag-delivered { background:var(--green); }
+.otag-lop       { background:var(--blue); }
+.otag-undeliv   { background:var(--red); }
+.otag-texted    { background:var(--yellow); }
+.chev { font-size:.75rem; color:#bbb; transition:transform .25s; flex-shrink:0; }
+.card.collapsed .chev { transform:rotate(-90deg); }
+.card-body { padding:0 12px 13px; border-top:1px solid rgba(0,0,0,.06); }
+.card.collapsed .card-body { display:none; }
+.addr { font-size:.8rem; color:var(--sub); font-family:monospace; line-height:1.55; margin:9px 0 6px; white-space:pre-line; }
+.order-line { font-size:.7rem; font-family:monospace; color:#888; margin-bottom:10px; }
+.badges { display:flex; flex-wrap:wrap; gap:5px; margin-bottom:10px; }
+.badge { font-size:.62rem; font-weight:700; padding:3px 9px; border-radius:20px; color:white; }
+.b-apt    { background:#7d3c98; }
+.b-nh     { background:#0e6655; }
+.b-time   { background:#c0392b; }
+.b-flex   { background:#717d7e; }
+.b-card   { background:#1a5276; }
+.b-fruit  { background:#ca6f1e; }
+.b-flowers{ background:#e74c3c; }
+.special-note { font-size:.75rem; font-weight:700; color:#c0392b; background:#fdf0ef; border-left:3px solid #c0392b; padding:6px 10px; border-radius:0 7px 7px 0; margin-bottom:10px; }
+.product-box { font-size:.75rem; background:#f8f8f8; border:1px solid #e0e0e0; border-radius:8px; padding:8px 10px; margin-bottom:10px; line-height:1.6; font-family:monospace; color:#444; }
+.action-btns { display:grid; grid-template-columns:1fr 1fr 1fr; gap:7px; margin-bottom:10px; }
+.abtn { display:block; padding:12px 4px; border-radius:9px; text-align:center; text-decoration:none; font-size:.7rem; font-weight:700; letter-spacing:.04em; border:none; cursor:pointer; transition:opacity .15s,transform .1s; }
+.abtn:active { opacity:.75; transform:scale(.97); }
+.abtn-nav  { background:#1a1a2e; color:white; }
+.abtn-text { background:#1e8449; color:white; }
+.abtn-call { background:#1a5276; color:white; }
+.status-row { display:flex; gap:6px; margin-bottom:10px; }
+.sbtn { flex:1; padding:8px 3px; border-radius:8px; border:2px solid transparent; font-size:.62rem; font-weight:700; cursor:pointer; transition:all .18s; letter-spacing:.03em; text-align:center; }
+.sbtn-y { background:#fef3e2; color:var(--yellow); border-color:var(--yellow); }
+.sbtn-y.active { background:var(--yellow); color:white; }
+.outcome-label { font-size:.65rem; font-weight:700; color:var(--sub); letter-spacing:.06em; text-transform:uppercase; margin-bottom:6px; font-family:monospace; }
+.outcome-row { display:grid; grid-template-columns:1fr 1fr 1fr; gap:6px; margin-bottom:10px; }
+.obtn { padding:11px 4px; border-radius:9px; border:2px solid transparent; font-size:.65rem; font-weight:700; cursor:pointer; text-align:center; transition:all .18s; line-height:1.3; }
+.obtn:active { transform:scale(.96); }
+.obtn-d { background:#eafaf1; color:var(--green); border-color:var(--green); }
+.obtn-d.active { background:var(--green); color:white; }
+.obtn-l { background:#eaf4fb; color:var(--blue); border-color:var(--blue); }
+.obtn-l.active { background:var(--blue); color:white; }
+.obtn-u { background:#fdf0ef; color:var(--red); border-color:var(--red); }
+.obtn-u.active { background:var(--red); color:white; }
+.ts-line { font-size:.68rem; font-family:monospace; font-weight:700; margin-bottom:8px; display:none; }
+.ts-line.show { display:block; }
+.ts-d { color:var(--green); } .ts-l { color:var(--blue); } .ts-u { color:var(--red); }
+.notes-label { font-size:.65rem; font-weight:700; color:var(--sub); letter-spacing:.06em; text-transform:uppercase; margin-bottom:4px; font-family:monospace; }
+.notes-in { width:100%; padding:8px 10px; border:1px solid #ddd; border-radius:8px; font-size:.82rem; background:rgba(255,255,255,.85); color:var(--text); resize:none; font-family:monospace; line-height:1.45; margin-bottom:7px; }
+.notes-in:focus { outline:none; border-color:#aaa; background:white; }
+.undeliv-in { display:none; width:100%; padding:8px 10px; border:1px solid var(--red); border-radius:8px; font-size:.82rem; background:#fff8f8; color:var(--text); resize:none; font-family:monospace; line-height:1.45; }
+.undeliv-in.show { display:block; }
+.summary-section { margin:16px 10px 0; border-radius:13px; overflow:hidden; border:2px solid #1a1a2e; background:white; box-shadow:0 2px 10px rgba(0,0,0,.1); }
+.summary-head { background:#1a1a2e; color:white; padding:13px 14px; text-align:center; }
+.summary-head h2 { font-size:.9rem; letter-spacing:.08em; }
+.summary-head p  { font-size:.68rem; opacity:.6; margin-top:3px; font-family:monospace; }
+.sum-group-title { font-size:.65rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:white; padding:6px 14px; font-family:monospace; }
+.sg-delivered { background:var(--green); } .sg-lop { background:var(--blue); } .sg-undeliv { background:var(--red); } .sg-pending { background:#888; }
+.sum-row { display:flex; align-items:flex-start; padding:10px 14px; border-bottom:1px solid #f0f0f0; gap:10px; }
+.sum-row:last-child { border-bottom:none; }
+.sum-num { font-size:.78rem; font-weight:800; color:#aaa; min-width:20px; font-family:monospace; padding-top:1px; }
+.sum-info { flex:1; }
+.sum-name { font-size:.82rem; font-weight:700; color:var(--text); }
+.sum-time { font-size:.68rem; font-family:monospace; color:var(--sub); margin-top:2px; }
+.sum-note { font-size:.68rem; font-family:monospace; color:#888; margin-top:2px; font-style:italic; }
+.sum-tag { font-size:.6rem; font-weight:700; padding:3px 8px; border-radius:20px; color:white; white-space:nowrap; flex-shrink:0; }
+.st-d { background:var(--green); } .st-l { background:var(--blue); } .st-u { background:var(--red); } .st-p { background:#aaa; }
+.refresh-btn { display:block; width:calc(100% - 24px); margin:12px auto; padding:12px; background:#1a1a2e; color:white; border:none; border-radius:10px; font-size:.8rem; font-weight:700; cursor:pointer; letter-spacing:.05em; text-align:center; }
+.refresh-btn:active { opacity:.8; }
 </style>
 </head>
 <body>
-
 <header>
   <h1>🌸 NICOLE'S DELIVERY RUN</h1>
-  <div class="run-meta" id="run-meta">DRY RUN TEST &middot; 21 Stops &middot; Phoenix, AZ</div>
-  <div class="counter" id="counter">0 of 21 complete</div>
+  <div class="run-meta">THURSDAY, MAY 7, 2026 &middot; 23 STOPS &middot; ZONE 2B · SURPRISE / SUN CITY, AZ</div>
+  <div class="counter" id="counter">0 of 23 complete</div>
   <div class="controls">
     <button class="ctrl-btn" onclick="expandAll()">EXPAND ALL</button>
     <button class="ctrl-btn" onclick="collapseAll()">COLLAPSE ALL</button>
     <button class="ctrl-btn" onclick="hideDone()">HIDE DONE</button>
     <button class="ctrl-btn green" onclick="refreshSummary()">SUMMARY ↓</button>
   </div>
-  <div class="controls" style="padding-top:0;">
-    <button class="ctrl-btn danger" onclick="showResetModal()">🗑️ CLEAR &amp; START NEW RUN</button>
-  </div>
 </header>
 <div class="progress-bar"><div class="progress-fill" id="prog"></div></div>
-
 <div class="stops-wrap" id="stops-wrap"></div>
 
 <div class="summary-section" id="summary-section">
@@ -283,399 +127,357 @@ header h1 { font-size: 1rem; font-weight: 700; letter-spacing: .08em; text-align
   <button class="refresh-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" style="background:#27ae60;">↑ BACK TO TOP</button>
 </div>
 
-<!-- RESET MODAL -->
-<div class="modal-overlay" id="reset-modal">
-  <div class="modal-box">
-    <h3>🗑️ Clear This Run?</h3>
-    <p>This will wipe all notes, outcomes, and timestamps saved on this device. Use this when starting a fresh run.</p>
-    <div class="modal-btns">
-      <button class="modal-btn modal-btn-cancel" onclick="hideResetModal()">Cancel</button>
-      <button class="modal-btn modal-btn-confirm" onclick="clearAllData()">Yes, Clear It</button>
-    </div>
-  </div>
-</div>
-
 <script>
-var STORAGE_KEY = 'nicoleDeliveryRun_v4';
-
 var stops = [
-  { num:1,  name:"LOU PERRONE (TEST)",      addr:"27515 N 54th Glen\nPhoenix, AZ 85083",                          phone:"6025013292", type:"Residential", badges:[], special:null },
-  { num:2,  name:"CANDY TSANG",             addr:"7614 N 20th St\nPhoenix, AZ 85020",                             phone:"6024607212", type:"Residential", badges:[], special:null },
-  { num:3,  name:"KRISTEN CASTILLO",        addr:"750 E Northern Ave, Unit 2041\nPhoenix, AZ 85020",              phone:"3058980204", type:"Apartment",   badges:["apt"], special:null },
-  { num:4,  name:"VANISHA DAVIS",           addr:"602 E Townley Ave, Apt 201\nPhoenix, AZ 85020",                 phone:"4694267447", type:"Apartment",   badges:["apt"], special:null },
-  { num:5,  name:"CAROLINA MALDONADO",      addr:"9618 N 5th St, Apt 6\nPhoenix, AZ 85020",                      phone:"6026685990", type:"Apartment",   badges:["apt"], special:null },
-  { num:6,  name:"MICHELLE YEVICK",         addr:"House of Refuge Sunnyslope\n9844 N 7th Pl\nPhoenix, AZ 85020", phone:"4803498408", type:"Church",      badges:["church","time"], special:"⏰ DELIVER BEFORE 5 PM" },
-  { num:7,  name:"MIKEANDKATHY MERRITT",    addr:"509 E Boca Raton Rd\nPhoenix, AZ 85022",                       phone:"5127758600", type:"Unspecified", badges:[], special:null },
-  { num:8,  name:"TIONNA COPELAND",         addr:"16220 N 7th St, Apt 2272\nPhoenix, AZ 85022",                  phone:"7073399108", type:"Apartment",   badges:["apt"], special:null },
-  { num:9,  name:"JOHNE MILLS",             addr:"1130 E Grovers Ave, Apt 107\nPhoenix, AZ 85022",               phone:"8723661524", type:"Residential", badges:["addon"], special:"📦 MUST INCLUDE ADD-ON — verify before door" },
-  { num:10, name:"VIDELA'S VIDELA",         addr:"16641 N 19th Pl, #14258\nPhoenix, AZ 85022",                   phone:"2162157775", type:"Residential", badges:["flex"], special:null },
-  { num:11, name:"KATIE STOCKTON",          addr:"2749 E Winchcomb Dr\nPhoenix, AZ 85032",                       phone:"4806658366", type:"Residential", badges:[], special:null },
-  { num:12, name:"GRACE LAMB",              addr:"2625 E Cactus Rd, Apt 3004\nPhoenix, AZ 85032",                phone:"4253019676", type:"Apartment",   badges:["apt"], special:null },
-  { num:13, name:"BRIDGET & PHIL CHEETHAM", addr:"2543 E Shangri La Rd\nPhoenix, AZ 85028",                      phone:"6027621307", type:"Residential", badges:[], special:null },
-  { num:14, name:"CHAD BEEMAN",             addr:"2821 E Cortez St\nPhoenix, AZ 85028",                          phone:"4024167660", type:"Residential", badges:[], special:null },
-  { num:15, name:"DEVAN JEONG",             addr:"12400 N Tatum Blvd, #5211\nPhoenix, AZ 85032",                 phone:"5203137520", type:"Apartment",   badges:["apt"], special:null },
-  { num:16, name:"ALYSSANDRA DIMMICK",      addr:"12818 N 38th Way\nPhoenix, AZ 85032",                          phone:"5205489360", type:"Residential", badges:[], special:null },
-  { num:17, name:"CHEYENNE EMEDE",          addr:"Dubliner Irish Pub\n3841 E Thunderbird Rd\nPhoenix, AZ 85032", phone:"5204502673", type:"Business",    badges:["biz","time"], special:"⏰ DELIVER BEFORE 5 PM — call ahead" },
-  { num:18, name:"XHOVANA LUCA ULAJ",       addr:"3845 E Kings Ave\nPhoenix, AZ 85032",                          phone:"9148197405", type:"Residential", badges:[], special:null },
-  { num:19, name:"ALYSSA GIBSON",           addr:"3402 E Kelton Ln\nPhoenix, AZ 85032",                          phone:"7812281384", type:"Residential", badges:[], special:null },
-  { num:20, name:"AMANDA SANDERS",          addr:"3335 E Kelton Ln\nPhoenix, AZ 85032",                          phone:"9518703567", type:"Residential", badges:[], special:null },
-  { num:21, name:"ADDISON KAE",             addr:"4722 E Bell Rd, Apt 2089\nPhoenix, AZ 85032",                  phone:"2086025048", type:"Apartment",   badges:["apt"], special:null }
+  {
+    num:1, name:"JACKIE GUYER",
+    addr:"16501 N El Mirage Rd, Lot 820\nSurprise, AZ 85378",
+    phone:"6239751666", type:"Residential",
+    order:"BMT #43004124 · Order #46640645",
+    product:"Always on My Mind-XL: 8\" GthrVse, RoseP...\nCard Isle Personalized Sku",
+    badges:["card"], special:null,
+    flex:false, notes_pre:"CARD ISLE ID: UBCS5"
+  },
+  {
+    num:2, name:"MARILYN CRAFT",
+    addr:"13414 W Ironwood St\nSurprise, AZ 85374",
+    phone:"4803359780", type:"Residential",
+    order:"BMT #43119262 · Order #46668808",
+    product:"Floral Embrace-SM: 5\" Cyl, AstcLilOrg, S...",
+    badges:["flex"], special:"📅 FLEX — FRI 5/8 PREFERRED · THU 5/7–FRI 5/8 ACCEPTABLE",
+    flex:true, notes_pre:null
+  },
+  {
+    num:3, name:"DANA JACKSON",
+    addr:"13601 W Caribbean Ln\nSurprise, AZ 85379",
+    phone:"6024104840", type:"Residential",
+    order:"BMT #43373553 · Order #46723086",
+    product:"Mother's Embrace-SM: RoseVse, #9PkRi...",
+    badges:[], special:null,
+    flex:false, notes_pre:null
+  },
+  {
+    num:4, name:"POLLY PHILLIPS",
+    addr:"13563 N 145th Dr\nSurprise, AZ 85379",
+    phone:"6233373797", type:"Residential",
+    order:"BMT #43364303 · Order #46721631",
+    product:"Fields of Europe Spring MD: 8\" RseVse, R...",
+    badges:["flex"], special:"📅 FLEX — FRI 5/8 PREFERRED · THU 5/7–FRI 5/8 ACCEPTABLE",
+    flex:true, notes_pre:null
+  },
+  {
+    num:5, name:"MANDY SIEWERTSEN",
+    addr:"14645 W Georgia Dr\nSurprise, AZ 85379",
+    phone:"4808228634", type:"Residential",
+    order:"BMT #42832462 · Order #46600807",
+    product:"*BUNDLE* LAVENDER GARDEN IN CLEAR 8...",
+    badges:["fruit"], special:null,
+    flex:false, notes_pre:"FRUIT AND FLOWERS"
+  },
+  {
+    num:6, name:"MYRNA HINKEL",
+    addr:"15510 N La Cometa, Apt 3413\nSurprise, AZ 85374",
+    phone:"2066509614", type:"Apartment",
+    order:"BMT #43414364 · Order #46728348",
+    product:"Designer Dreams Bqt-MD: PkBagVse, Foa...",
+    badges:["apt","flex"], special:"📅 FLEX — FRI 5/8 PREFERRED · THU 5/7–FRI 5/8 ACCEPTABLE",
+    flex:true, notes_pre:null
+  },
+  {
+    num:7, name:"JAN LEIKVOLL",
+    addr:"13973 W Pueblo Trl\nSurprise, AZ 85374",
+    phone:"6028269940", type:"Residential",
+    order:"BMT #42643110 · Order #46542230",
+    product:"*BUNDLE* LAVENDER GARDEN IN CLEAR 8...\nCard Isle Personalized Sku — Fruit Box",
+    badges:["card","fruit"], special:null,
+    flex:false, notes_pre:"CARD ISLE ID: BKTX7"
+  },
+  {
+    num:8, name:"KARLA REED",
+    addr:"Holiday Vista de la Montaña\n18510 N Parkview Pl\nSun City, AZ 85374",
+    phone:"6232021972", type:"Nursing Home",
+    order:"BMT #43367794 · Order #46722164",
+    product:"Floral Embrace-MD: 5\" Cyl, RoseHtPk, Ast...\nCard Isle Personalized Sku",
+    badges:["nh","flex","card"], special:"🏥 NURSING HOME — check in at front desk\n📅 FLEX — FRI 5/8 PREFERRED · THU 5/7–FRI 5/8 ACCEPTABLE",
+    flex:true, notes_pre:"CARD ISLE ID: 2HS76"
+  },
+  {
+    num:9, name:"BARBARA SCHAPS",
+    addr:"13442 W Ashwood Dr\nSun City West, AZ 85375",
+    phone:"3039818935", type:"Residential",
+    order:"BMT #42888512 · Order #46613809",
+    product:"*BUNDLE* PREMADE LG FIELDS OF EUROPE...",
+    badges:["flowers"], special:null,
+    flex:false, notes_pre:"FLOWERS AND BERRIES"
+  },
+  {
+    num:10, name:"SHIRLEY KROG",
+    addr:"12815 W Crystal Lake Dr\nSun City West, AZ 85375",
+    phone:"6232973807", type:"Residential",
+    order:"BMT #42863571 · Order #46608212",
+    product:"*BUNDLE* LAVENDER GARDEN+VASE + 6CT D...",
+    badges:["fruit"], special:null,
+    flex:false, notes_pre:"FRUIT AND FLOWERS"
+  },
+  {
+    num:11, name:"MARY MATHIASON",
+    addr:"13328 W Crown Ridge Dr\nSun City West, AZ 85375",
+    phone:"6236942582", type:"Residential",
+    order:"BMT #43404039 · Order #46726571",
+    product:"Spring Sentiment Bqt-MD: RstcCbe, Foa...",
+    badges:["flex"], special:"📅 FLEX — FRI 5/8 PREFERRED · THU 5/7–FRI 5/8 ACCEPTABLE",
+    flex:true, notes_pre:null
+  },
+  {
+    num:12, name:"JUDI DILLARD",
+    addr:"13921 W Elmbrook Dr\nSun City West, AZ 85375",
+    phone:"6237340074", type:"Residential",
+    order:"BMT #43371886 · Order #46722814",
+    product:"Floral Embrace-MD: 5\" Cyl, RoseHtPk, Ast...",
+    badges:["flex"], special:"📅 FLEX — FRI 5/8 PREFERRED · THU 5/7–FRI 5/8 ACCEPTABLE",
+    flex:true, notes_pre:null
+  },
+  {
+    num:13, name:"SHIRLEY MELLUM",
+    addr:"14627 W Futura Dr\nSun City West, AZ 85375",
+    phone:"6236409677", type:"Residential",
+    order:"BMT #42930503 · Order #46622090",
+    product:"*BUNDLE* LAVENDER GARDEN IN CLEAR 8...",
+    badges:["flowers"], special:null,
+    flex:false, notes_pre:"FLOWERS AND BERRIES"
+  },
+  {
+    num:14, name:"MARIAN HAMMAN",
+    addr:"21868 N Montego Dr\nSun City West, AZ 85375",
+    phone:"4252690258", type:"Residential",
+    order:"BMT #43357157 · Order #46720477",
+    product:"Floral Embrace-MD: 5\" Cyl, RoseHtPk, Ast...",
+    badges:["flex"], special:"📅 FLEX — FRI 5/8 PREFERRED · THU 5/7–FRI 5/8 ACCEPTABLE",
+    flex:true, notes_pre:null
+  },
+  {
+    num:15, name:"PAT CRAMER",
+    addr:"14434 W Gunsight Dr\nSun City West, AZ 85375",
+    phone:"4804501678", type:"Residential",
+    order:"BMT #43432664 · Order #46732548",
+    product:"Floral Embrace-LG: 6\" Cyl, RoseHtPk, Ast...",
+    badges:["flex"], special:"📅 FLEX — FRI 5/8 PREFERRED · THU 5/7–FRI 5/8 ACCEPTABLE",
+    flex:true, notes_pre:null
+  },
+  {
+    num:16, name:"BONNIE GARIEPY",
+    addr:"15801 W Huron Dr\nSun City West, AZ 85375",
+    phone:"5033809872", type:"Residential",
+    order:"BMT #43372449 · Order #46722900",
+    product:"Floral Embrace-MD: 5\" Cyl, RoseHtPk, Ast...",
+    badges:[], special:null,
+    flex:false, notes_pre:null
+  },
+  {
+    num:17, name:"JANINE SUMMERS",
+    addr:"21314 N Limousine Dr\nSun City West, AZ 85375",
+    phone:"6232668343", type:"Residential",
+    order:"BMT #42998938 · Order #46639290",
+    product:"Always on My Mind-XL: 8\" GthrVse, RoseP...",
+    badges:[], special:null,
+    flex:false, notes_pre:null
+  },
+  {
+    num:18, name:"CAROL HOPMAN",
+    addr:"15535 W Agua Linda Ln\nSurprise, AZ 85374",
+    phone:"2069992369", type:"Residential",
+    order:"BMT #43131827 · Order #46672103",
+    product:"Honey Bee Buzz for Spring-LG: BeeVse,...",
+    badges:["flex"], special:"📅 FLEX — FRI 5/8 PREFERRED · THU 5/7–FRI 5/8 ACCEPTABLE",
+    flex:true, notes_pre:null
+  },
+  {
+    num:19, name:"KAY SAWATZKI",
+    addr:"17431 N Thoroughbred Dr\nSurprise, AZ 85374",
+    phone:"9038196298", type:"Residential",
+    order:"BMT #43202919 · Order #46687509",
+    product:"Honey Bee Buzz for Spring-LG: BeeVse,...",
+    badges:[], special:null,
+    flex:false, notes_pre:null
+  },
+  {
+    num:20, name:"JOIE VALDEZ",
+    addr:"16161 W Davis Rd\nSun City, AZ 85374",
+    phone:"4805896560", type:"Residential",
+    order:"BMT #43389872 · Order #46724787",
+    product:"Daydream Bouquet-LG: LavGlsVse, RoseP...",
+    badges:[], special:null,
+    flex:false, notes_pre:null
+  },
+  {
+    num:21, name:"MICHELLE FERNANDEZ",
+    addr:"16630 N Reems Rd, Apt 1064\nSurprise, AZ 85374",
+    phone:"9092292249", type:"Apartment",
+    order:"BMT #43219228 · Order #46691082",
+    product:"Lovely Lavender Medley-MD: 5\" Cyl, Rose...\nCard Isle Personalized Sku",
+    badges:["apt","flex","card"], special:"📅 FLEX — FRI 5/8 PREFERRED · THU 5/7–FRI 5/8 ACCEPTABLE",
+    flex:true, notes_pre:"CARD ISLE ID: 9KHJ9"
+  },
+  {
+    num:22, name:"GERI DUNN",
+    addr:"17647 SW Skyline Dr\nSurprise, AZ 85374",
+    phone:"9714096030", type:"Residential",
+    order:"BMT #43240894 · Order #46696310",
+    product:"Vibrant Floral Medley-XL: 8\" GthrVse, R...",
+    badges:["flex"], special:"📅 FLEX — FRI 5/8 PREFERRED · THU 5/7–FRI 5/8 ACCEPTABLE",
+    flex:true, notes_pre:null
+  },
+  {
+    num:23, name:"LINDA REPSHER",
+    addr:"17958 W Deneen Way\nSurprise, AZ 85374",
+    phone:"9704563194", type:"Residential",
+    order:"BMT #43368434 · Order #46722279",
+    product:"Designer Dreams Bqt-SM: PkBagVse, Foa...",
+    badges:[], special:null,
+    flex:false, notes_pre:null
+  }
 ];
 
 var badgeDefs = {
-  apt:    { cls:"b-apt",    label:"🏠 APARTMENT" },
-  biz:    { cls:"b-biz",    label:"🏢 BUSINESS — CALL AHEAD" },
-  church: { cls:"b-church", label:"⛪ CHURCH / FACILITY" },
-  time:   { cls:"b-time",   label:"⏰ TIME SENSITIVE" },
-  addon:  { cls:"b-addon",  label:"📦 CHECK ADD-ONS" },
-  flex:   { cls:"b-flex",   label:"📅 FLEX DELIVERY" }
+  apt:     { cls:"b-apt",    label:"🏠 APARTMENT" },
+  nh:      { cls:"b-nh",     label:"🏥 NURSING HOME" },
+  flex:    { cls:"b-flex",   label:"📅 FLEX DELIVERY" },
+  card:    { cls:"b-card",   label:"💌 CARD ISLE" },
+  fruit:   { cls:"b-fruit",  label:"🍓 FRUIT INCLUDED" },
+  flowers: { cls:"b-flowers",label:"💐 FLOWERS & BERRIES" }
 };
 
 var state = {};
+stops.forEach(function(s){ state[s.num]={texted:false,outcome:null,ts:null,notes:'',reason:''}; });
 
-// ── STORAGE ──
-function loadState() {
-  try {
-    var saved = localStorage.getItem(STORAGE_KEY);
-    if (saved) {
-      var parsed = JSON.parse(saved);
-      stops.forEach(function(s) {
-        state[s.num] = parsed[s.num] || freshState();
-      });
-    } else {
-      stops.forEach(function(s) { state[s.num] = freshState(); });
-    }
-  } catch(e) {
-    stops.forEach(function(s) { state[s.num] = freshState(); });
-  }
-}
-
-function freshState() {
-  return { texted: false, outcome: null, ts: null, notes: '', reason: '' };
-}
-
-function saveState() {
-  try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-  } catch(e) {}
-}
-
-function showSaveFlash(num) {
-  var el = document.getElementById('save-flash-' + num);
-  if (!el) return;
-  el.textContent = '✓ saved';
-  el.style.opacity = '1';
-  setTimeout(function(){ el.style.opacity = '0'; }, 1500);
-}
-
-// ── RESET ──
-function showResetModal() { document.getElementById('reset-modal').classList.add('show'); }
-function hideResetModal()  { document.getElementById('reset-modal').classList.remove('show'); }
-
-function clearAllData() {
-  try { localStorage.removeItem(STORAGE_KEY); } catch(e) {}
-  stops.forEach(function(s) { state[s.num] = freshState(); });
-  hideResetModal();
-  // re-render all cards cleanly
-  document.getElementById('stops-wrap').innerHTML = '';
-  buildCards();
-  restoreUI();
-  updateProgress();
-}
-
-// ── TIME ──
 function phxTime() {
-  return new Date().toLocaleTimeString('en-US', {
-    timeZone: 'America/Phoenix',
-    hour: 'numeric', minute: '2-digit', hour12: true
-  });
+  return new Date().toLocaleTimeString('en-US',{timeZone:'America/Phoenix',hour:'numeric',minute:'2-digit',hour12:true});
 }
+function navUrl(addr) { return 'https://maps.apple.com/?q='+encodeURIComponent(addr.replace(/\n/g,', ')); }
 
-function navUrl(addr) {
-  return 'https://maps.apple.com/?q=' + encodeURIComponent(addr.replace(/\n/g, ', '));
-}
-
-function doCall(phone) { window.location.href = 'tel:+1' + phone; }
-function doText(phone) { window.location.href = 'sms:+1' + phone; }
-
-// ── PROGRESS ──
 function updateProgress() {
-  var done = 0;
-  stops.forEach(function(s) { if (state[s.num].outcome) done++; });
-  document.getElementById('prog').style.width = ((done / stops.length) * 100) + '%';
-  document.getElementById('counter').textContent = done + ' of ' + stops.length + ' complete';
+  var done=0; stops.forEach(function(s){if(state[s.num].outcome)done++;});
+  document.getElementById('prog').style.width=((done/stops.length)*100)+'%';
+  document.getElementById('counter').textContent=done+' of '+stops.length+' complete';
 }
-
-// ── TEXTED ──
 function setTexted(num) {
-  var card = document.getElementById('c' + num);
-  var btn  = document.getElementById('tbtn' + num);
-  if (state[num].texted) {
-    state[num].texted = false;
-    if (!state[num].outcome) card.classList.remove('s-yellow');
-    btn.classList.remove('active');
-    btn.textContent = '🟡 MARK TEXTED';
-  } else {
-    state[num].texted = true;
-    if (!state[num].outcome) card.classList.add('s-yellow');
-    btn.classList.add('active');
-    btn.textContent = '🟡 TEXTED ✓';
-  }
+  state[num].texted=true;
+  document.getElementById('c'+num).classList.add('s-yellow');
+  var btn=document.getElementById('tbtn'+num);
+  btn.classList.add('active'); btn.textContent='🟡 TEXTED ✓';
   updateOtag(num);
-  saveState();
 }
-
-// ── OUTCOME ──
-function clearOutcome(num) {
-  var card = document.getElementById('c' + num);
-  state[num].outcome = null;
-  state[num].ts = null;
-  card.classList.remove('s-delivered','s-lop','s-undeliv');
-  if (state[num].texted) card.classList.add('s-yellow');
-  ['d','l','u'].forEach(function(x) {
-    var b = document.getElementById('obtn-'+x+'-'+num);
-    if (b) b.classList.remove('active');
-  });
-  var tsEl = document.getElementById('ts'+num);
-  var urEl = document.getElementById('ur'+num);
-  tsEl.className = 'ts-line';
-  tsEl.textContent = '';
-  urEl.classList.remove('show');
-  updateOtag(num);
-  updateProgress();
-  saveState();
-}
-
-function setOutcome(num, outcome) {
-  if (state[num].outcome === outcome) { clearOutcome(num); return; }
-  var card = document.getElementById('c' + num);
-  var ts   = phxTime();
-  state[num].outcome = outcome;
-  state[num].ts = ts;
+function setOutcome(num,outcome) {
+  var card=document.getElementById('c'+num);
+  var ts=phxTime();
+  state[num].outcome=outcome; state[num].ts=ts;
   card.classList.remove('s-yellow','s-delivered','s-lop','s-undeliv');
-  ['d','l','u'].forEach(function(x) {
-    var b = document.getElementById('obtn-'+x+'-'+num);
-    if (b) b.classList.remove('active');
-  });
-  var tsEl = document.getElementById('ts'+num);
-  var urEl = document.getElementById('ur'+num);
-  if (outcome === 'delivered') {
-    card.classList.add('s-delivered');
-    document.getElementById('obtn-d-'+num).classList.add('active');
-    tsEl.textContent = '✅ Delivered at ' + ts + ' — tap again to undo';
-    tsEl.className = 'ts-line show ts-d';
-    urEl.classList.remove('show');
-    setTimeout(function(){ card.classList.add('collapsed'); }, 600);
-  } else if (outcome === 'lop') {
-    card.classList.add('s-lop');
-    document.getElementById('obtn-l-'+num).classList.add('active');
-    tsEl.textContent = '🚪 Left on Porch at ' + ts + ' — tap again to undo';
-    tsEl.className = 'ts-line show ts-l';
-    urEl.classList.remove('show');
-    setTimeout(function(){ card.classList.add('collapsed'); }, 600);
-  } else if (outcome === 'undeliv') {
-    card.classList.add('s-undeliv');
-    document.getElementById('obtn-u-'+num).classList.add('active');
-    tsEl.textContent = '❌ Undeliverable at ' + ts + ' — tap again to undo';
-    tsEl.className = 'ts-line show ts-u';
+  ['d','l','u'].forEach(function(x){var b=document.getElementById('obtn-'+x+'-'+num);if(b)b.classList.remove('active');});
+  var tsEl=document.getElementById('ts'+num);
+  var urEl=document.getElementById('ur'+num);
+  if(outcome==='delivered'){
+    card.classList.add('s-delivered'); document.getElementById('obtn-d-'+num).classList.add('active');
+    tsEl.textContent='✅ Delivered at '+ts; tsEl.className='ts-line show ts-d';
+    urEl.classList.remove('show'); setTimeout(function(){card.classList.add('collapsed');},600);
+  } else if(outcome==='lop'){
+    card.classList.add('s-lop'); document.getElementById('obtn-l-'+num).classList.add('active');
+    tsEl.textContent='🚪 Left on Porch at '+ts; tsEl.className='ts-line show ts-l';
+    urEl.classList.remove('show'); setTimeout(function(){card.classList.add('collapsed');},600);
+  } else if(outcome==='undeliv'){
+    card.classList.add('s-undeliv'); document.getElementById('obtn-u-'+num).classList.add('active');
+    tsEl.textContent='❌ Undeliverable — logged at '+ts; tsEl.className='ts-line show ts-u';
     urEl.classList.add('show');
   }
-  updateOtag(num);
-  updateProgress();
-  saveState();
+  updateOtag(num); updateProgress();
 }
-
 function updateOtag(num) {
-  var el = document.getElementById('otag' + num);
-  var s  = state[num];
-  if (s.outcome === 'delivered')  { el.textContent = '✅ DELIVERED'; el.className = 'otag otag-delivered'; }
-  else if (s.outcome === 'lop')   { el.textContent = '🚪 LOP';       el.className = 'otag otag-lop'; }
-  else if (s.outcome === 'undeliv'){ el.textContent = '❌ UNDELIV';  el.className = 'otag otag-undeliv'; }
-  else if (s.texted)              { el.textContent = '🟡 TEXTED';    el.className = 'otag otag-texted'; }
-  else { el.textContent = ''; el.className = 'otag'; }
+  var el=document.getElementById('otag'+num); var s=state[num];
+  if(s.outcome==='delivered'){el.textContent='✅ DELIVERED';el.className='otag otag-delivered';}
+  else if(s.outcome==='lop'){el.textContent='🚪 LOP';el.className='otag otag-lop';}
+  else if(s.outcome==='undeliv'){el.textContent='❌ UNDELIV';el.className='otag otag-undeliv';}
+  else if(s.texted){el.textContent='🟡 TEXTED';el.className='otag otag-texted';}
+  else{el.textContent='';el.className='otag';}
 }
+function toggleCard(num){document.getElementById('c'+num).classList.toggle('collapsed');}
+function expandAll(){stops.forEach(function(s){document.getElementById('c'+s.num).classList.remove('collapsed');});}
+function collapseAll(){stops.forEach(function(s){document.getElementById('c'+s.num).classList.add('collapsed');});}
+function hideDone(){stops.forEach(function(s){var card=document.getElementById('c'+s.num);if(state[s.num].outcome)card.classList.add('collapsed');else card.classList.remove('collapsed');});}
+function saveNotes(num){state[num].notes=document.getElementById('notes'+num).value;}
+function saveReason(num){state[num].reason=document.getElementById('ur'+num).value;}
 
-function saveNotes(num) {
-  state[num].notes = document.getElementById('notes'+num).value;
-  saveState();
-  showSaveFlash(num);
-}
-function saveReason(num) {
-  state[num].reason = document.getElementById('ur'+num).value;
-  saveState();
-  showSaveFlash(num);
-}
-
-function toggleCard(num) {
-  document.getElementById('c'+num).classList.toggle('collapsed');
-}
-function expandAll()  { stops.forEach(function(s){ document.getElementById('c'+s.num).classList.remove('collapsed'); }); }
-function collapseAll(){ stops.forEach(function(s){ document.getElementById('c'+s.num).classList.add('collapsed'); }); }
-function hideDone() {
-  stops.forEach(function(s) {
-    var card = document.getElementById('c'+s.num);
-    if (state[s.num].outcome) card.classList.add('collapsed');
-    else card.classList.remove('collapsed');
-  });
-}
-
-// ── SUMMARY ──
 function refreshSummary() {
-  var groups = { delivered:[], lop:[], undeliv:[], pending:[] };
-  stops.forEach(function(s) {
-    var st = state[s.num];
-    groups[st.outcome || 'pending'].push({ s:s, st:st });
-  });
-  var total = stops.length;
-  var done  = total - groups.pending.length;
-  document.getElementById('sum-meta').textContent =
-    done + ' of ' + total + ' complete  ·  ' +
-    groups.delivered.length + ' delivered  ·  ' +
-    groups.lop.length + ' LOP  ·  ' +
-    groups.undeliv.length + ' undeliverable  ·  ' +
-    groups.pending.length + ' pending';
-
-  var html = '';
-  var sections = [
-    { key:'delivered', label:'✅ DELIVERED',          cls:'sg-delivered', tagCls:'st-d', tagTxt:'DELIVERED' },
-    { key:'lop',       label:'🚪 LEFT ON PORCH',      cls:'sg-lop',       tagCls:'st-l', tagTxt:'LOP' },
-    { key:'undeliv',   label:'❌ UNDELIVERABLE',      cls:'sg-undeliv',   tagCls:'st-u', tagTxt:'UNDELIV' },
-    { key:'pending',   label:'⏳ PENDING / NOT DONE', cls:'sg-pending',   tagCls:'st-p', tagTxt:'PENDING' }
+  var groups={delivered:[],lop:[],undeliv:[],pending:[]};
+  stops.forEach(function(s){var bucket=state[s.num].outcome||'pending';groups[bucket].push({s:s,st:state[s.num]});});
+  var total=stops.length,done=total-groups.pending.length;
+  document.getElementById('sum-meta').textContent=done+' of '+total+' complete  ·  '+groups.delivered.length+' delivered  ·  '+groups.lop.length+' LOP  ·  '+groups.undeliv.length+' undeliverable  ·  '+groups.pending.length+' pending';
+  var html='';
+  var sections=[
+    {key:'delivered',label:'✅ DELIVERED',cls:'sg-delivered',tagCls:'st-d',tagTxt:'DELIVERED'},
+    {key:'lop',label:'🚪 LEFT ON PORCH',cls:'sg-lop',tagCls:'st-l',tagTxt:'LOP'},
+    {key:'undeliv',label:'❌ UNDELIVERABLE',cls:'sg-undeliv',tagCls:'st-u',tagTxt:'UNDELIV'},
+    {key:'pending',label:'⏳ PENDING',cls:'sg-pending',tagCls:'st-p',tagTxt:'PENDING'}
   ];
-  sections.forEach(function(sec) {
-    if (groups[sec.key].length === 0) return;
-    html += '<div class="sum-group-title ' + sec.cls + '">' + sec.label + ' (' + groups[sec.key].length + ')</div>';
-    groups[sec.key].forEach(function(item) {
-      html += '<div class="sum-row">' +
-        '<div class="sum-num">' + item.s.num + '</div>' +
-        '<div class="sum-info">' +
-          '<div class="sum-name">' + item.s.name + '</div>' +
-          (item.st.ts     ? '<div class="sum-time">Time: ' + item.st.ts + '</div>' : '') +
-          (item.st.notes  ? '<div class="sum-note">Note: ' + item.st.notes + '</div>' : '') +
-          (item.st.reason ? '<div class="sum-note">Reason: ' + item.st.reason + '</div>' : '') +
-        '</div>' +
-        '<span class="sum-tag ' + sec.tagCls + '">' + sec.tagTxt + '</span>' +
-      '</div>';
+  sections.forEach(function(sec){
+    if(!groups[sec.key].length)return;
+    html+='<div class="sum-group-title '+sec.cls+'">'+sec.label+' ('+groups[sec.key].length+')</div>';
+    groups[sec.key].forEach(function(item){
+      html+='<div class="sum-row"><div class="sum-num">'+item.s.num+'</div><div class="sum-info"><div class="sum-name">'+item.s.name+'</div>'+(item.st.ts?'<div class="sum-time">'+item.st.ts+'</div>':'')+(item.st.notes?'<div class="sum-note">Note: '+item.st.notes+'</div>':'')+(item.st.reason?'<div class="sum-note">Reason: '+item.st.reason+'</div>':'')+'</div><span class="sum-tag '+sec.tagCls+'">'+sec.tagTxt+'</span></div>';
     });
   });
-  document.getElementById('sum-body').innerHTML = html;
-  document.getElementById('summary-section').scrollIntoView({ behavior: 'smooth' });
+  document.getElementById('sum-body').innerHTML=html;
+  document.getElementById('summary-section').scrollIntoView({behavior:'smooth'});
 }
 
-// ── BUILD CARDS ──
 function buildCards() {
-  var wrap = document.getElementById('stops-wrap');
-  stops.forEach(function(stop) {
-    var badgesHtml = '';
-    stop.badges.forEach(function(b) {
-      var bd = badgeDefs[b];
-      badgesHtml += '<span class="badge ' + bd.cls + '">' + bd.label + '</span>';
-    });
-    var specialHtml = stop.special ? '<div class="special-note">' + stop.special + '</div>' : '';
-
-    var card = document.createElement('div');
-    card.className = 'card collapsed';
-    card.id = 'c' + stop.num;
-    card.dataset.num = stop.num;
-
-    card.innerHTML =
-      '<div class="card-head" onclick="toggleCard(' + stop.num + ')">' +
-        '<div class="stop-num">' + stop.num + '</div>' +
-        '<div class="stop-info">' +
-          '<div class="stop-name">' + stop.name + '</div>' +
-          '<div class="stop-sub">' + stop.type + '</div>' +
-        '</div>' +
-        '<span class="otag" id="otag' + stop.num + '"></span>' +
-        '<div class="chev">▼</div>' +
-      '</div>' +
-      '<div class="card-body">' +
-        (badgesHtml ? '<div class="badges">' + badgesHtml + '</div>' : '') +
-        specialHtml +
-        '<div class="addr">' + stop.addr + '</div>' +
-        '<div class="action-btns">' +
-          '<a class="abtn abtn-nav" href="' + navUrl(stop.addr) + '" target="_blank">📍 NAVIGATE</a>' +
-          '<button class="abtn abtn-text" onclick="doText(\'' + stop.phone + '\')">💬 TEXT</button>' +
-          '<button class="abtn abtn-call" onclick="doCall(\'' + stop.phone + '\')">📞 CALL</button>' +
-        '</div>' +
-        '<div class="status-row">' +
-          '<button class="sbtn sbtn-y" id="tbtn' + stop.num + '" onclick="setTexted(' + stop.num + ')">🟡 MARK TEXTED</button>' +
-        '</div>' +
-        '<div class="outcome-label">DELIVERY OUTCOME</div>' +
-        '<div class="outcome-row">' +
-          '<button class="obtn obtn-d" id="obtn-d-' + stop.num + '" onclick="setOutcome(' + stop.num + ',\'delivered\')">✅ DELIVERED</button>' +
-          '<button class="obtn obtn-l" id="obtn-l-' + stop.num + '" onclick="setOutcome(' + stop.num + ',\'lop\')">🚪 LEFT ON PORCH</button>' +
-          '<button class="obtn obtn-u" id="obtn-u-' + stop.num + '" onclick="setOutcome(' + stop.num + ',\'undeliv\')">❌ UNDELIVERABLE</button>' +
-        '</div>' +
-        '<div class="ts-line" id="ts' + stop.num + '"></div>' +
-        '<div class="notes-label">NOTES / GATE CODE / RESPONSE</div>' +
-        '<textarea class="notes-in" id="notes' + stop.num + '" rows="2" placeholder="Gate code, building #, directions..." oninput="saveNotes(' + stop.num + ')"></textarea>' +
-        '<textarea class="undeliv-in" id="ur' + stop.num + '" rows="2" placeholder="Reason undeliverable..." oninput="saveReason(' + stop.num + ')"></textarea>' +
-        '<div class="save-indicator" id="save-flash-' + stop.num + '" style="opacity:0"></div>' +
+  var wrap=document.getElementById('stops-wrap');
+  stops.forEach(function(stop){
+    var badgesHtml='';
+    stop.badges.forEach(function(b){var bd=badgeDefs[b];badgesHtml+='<span class="badge '+bd.cls+'">'+bd.label+'</span>';});
+    var specialHtml=stop.special?'<div class="special-note">'+stop.special+'</div>':'';
+    var preNoteHtml=stop.notes_pre?'<div class="special-note" style="color:#1a5276;background:#eaf4fb;border-color:#1a5276;">ℹ️ '+stop.notes_pre+'</div>':'';
+    var card=document.createElement('div');
+    card.className='card collapsed'; card.id='c'+stop.num;
+    card.innerHTML=
+      '<div class="card-head" onclick="toggleCard('+stop.num+')">'+
+        '<div class="stop-num">'+stop.num+'</div>'+
+        '<div class="stop-info">'+
+          '<div class="stop-name">'+stop.name+'</div>'+
+          '<div class="stop-sub">'+stop.type+'</div>'+
+        '</div>'+
+        '<span class="otag" id="otag'+stop.num+'"></span>'+
+        '<div class="chev">▼</div>'+
+      '</div>'+
+      '<div class="card-body">'+
+        (badgesHtml?'<div class="badges">'+badgesHtml+'</div>':'')+
+        specialHtml+preNoteHtml+
+        '<div class="addr">'+stop.addr+'</div>'+
+        '<div class="order-line">'+stop.order+'</div>'+
+        '<div class="product-box">'+stop.product+'</div>'+
+        '<div class="action-btns">'+
+          '<a class="abtn abtn-nav" href="'+navUrl(stop.addr)+'" target="_blank">📍 NAVIGATE</a>'+
+          '<a class="abtn abtn-text" href="sms:+1'+stop.phone+'">💬 TEXT</a>'+
+          '<a class="abtn abtn-call" href="tel:+1'+stop.phone+'">📞 CALL</a>'+
+        '</div>'+
+        '<div class="status-row">'+
+          '<button class="sbtn sbtn-y" id="tbtn'+stop.num+'" onclick="setTexted('+stop.num+')">🟡 MARK TEXTED</button>'+
+        '</div>'+
+        '<div class="outcome-label">DELIVERY OUTCOME</div>'+
+        '<div class="outcome-row">'+
+          '<button class="obtn obtn-d" id="obtn-d-'+stop.num+'" onclick="setOutcome('+stop.num+',\'delivered\')">✅ DELIVERED</button>'+
+          '<button class="obtn obtn-l" id="obtn-l-'+stop.num+'" onclick="setOutcome('+stop.num+',\'lop\')">🚪 LEFT ON PORCH</button>'+
+          '<button class="obtn obtn-u" id="obtn-u-'+stop.num+'" onclick="setOutcome('+stop.num+',\'undeliv\')">❌ UNDELIVERABLE</button>'+
+        '</div>'+
+        '<div class="ts-line" id="ts'+stop.num+'"></div>'+
+        '<div class="notes-label">NOTES / GATE CODE / RESPONSE</div>'+
+        '<textarea class="notes-in" id="notes'+stop.num+'" rows="2" placeholder="Gate code, building #, directions, recipient notes..." oninput="saveNotes('+stop.num+')"></textarea>'+
+        '<textarea class="undeliv-in" id="ur'+stop.num+'" rows="2" placeholder="Reason undeliverable..." oninput="saveReason('+stop.num+')"></textarea>'+
       '</div>';
-
     wrap.appendChild(card);
   });
 }
 
-// ── RESTORE UI FROM SAVED STATE ──
-function restoreUI() {
-  stops.forEach(function(s) {
-    var st   = state[s.num];
-    var card = document.getElementById('c' + s.num);
-    if (!card) return;
-
-    // restore notes
-    var notesEl = document.getElementById('notes' + s.num);
-    if (notesEl && st.notes) notesEl.value = st.notes;
-
-    var urEl = document.getElementById('ur' + s.num);
-    if (urEl && st.reason) urEl.value = st.reason;
-
-    // restore texted
-    if (st.texted && !st.outcome) {
-      card.classList.add('s-yellow');
-      var btn = document.getElementById('tbtn' + s.num);
-      if (btn) { btn.classList.add('active'); btn.textContent = '🟡 TEXTED ✓'; }
-    }
-
-    // restore outcome
-    if (st.outcome) {
-      var tsEl = document.getElementById('ts' + s.num);
-      ['d','l','u'].forEach(function(x) {
-        var b = document.getElementById('obtn-'+x+'-'+s.num);
-        if (b) b.classList.remove('active');
-      });
-      if (st.outcome === 'delivered') {
-        card.classList.add('s-delivered');
-        card.classList.add('collapsed');
-        document.getElementById('obtn-d-'+s.num).classList.add('active');
-        tsEl.textContent = '✅ Delivered at ' + st.ts + ' — tap again to undo';
-        tsEl.className = 'ts-line show ts-d';
-      } else if (st.outcome === 'lop') {
-        card.classList.add('s-lop');
-        card.classList.add('collapsed');
-        document.getElementById('obtn-l-'+s.num).classList.add('active');
-        tsEl.textContent = '🚪 Left on Porch at ' + st.ts + ' — tap again to undo';
-        tsEl.className = 'ts-line show ts-l';
-      } else if (st.outcome === 'undeliv') {
-        card.classList.add('s-undeliv');
-        document.getElementById('obtn-u-'+s.num).classList.add('active');
-        tsEl.textContent = '❌ Undeliverable at ' + st.ts + ' — tap again to undo';
-        tsEl.className = 'ts-line show ts-u';
-        if (urEl) urEl.classList.add('show');
-      }
-    }
-
-    updateOtag(s.num);
-  });
-}
-
-window.onload = function() {
-  loadState();
-  buildCards();
-  restoreUI();
-  updateProgress();
-};
+buildCards();
+updateProgress();
 </script>
 </body>
 </html>
