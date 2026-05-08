@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>🌸 Nicole – Fri 5/8 Run 2</title>
+<title>🌸 Nicole – Fri 5/8 Run 3</title>
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 :root {
@@ -44,17 +44,18 @@ header h1 { font-size:1rem; font-weight:700; letter-spacing:.08em; text-align:ce
 .badges { display:flex; flex-wrap:wrap; gap:5px; margin-bottom:10px; }
 .badge { font-size:.62rem; font-weight:700; padding:3px 9px; border-radius:20px; color:white; }
 .b-apt   { background:#7d3c98; }
-.b-flex  { background:#717d7e; }
 .b-card  { background:#1a5276; }
-.b-fruit { background:#ca6f1e; }
+.b-addon { background:#ca6f1e; }
+.b-choco { background:#6d4c41; }
+.b-ftd   { background:#6c3483; }
 .b-fri   { background:#1e8449; }
-.b-sat   { background:#ca6f1e; }
-.b-sun   { background:#2471a3; }
-.b-ill   { background:#922b21; }
+.b-sat   { background:#e67e22; }
+.b-flex  { background:#717d7e; }
+.b-mylar { background:#c0392b; }
 .special-note { font-size:.75rem; font-weight:700; color:#c0392b; background:#fdf0ef; border-left:3px solid #c0392b; padding:6px 10px; border-radius:0 7px 7px 0; margin-bottom:8px; }
 .flex-note { font-size:.75rem; font-weight:700; color:#717d7e; background:#f4f6f7; border-left:3px solid #aab; padding:6px 10px; border-radius:0 7px 7px 0; margin-bottom:8px; }
 .info-note { font-size:.75rem; font-weight:700; color:#1a5276; background:#eaf4fb; border-left:3px solid #1a5276; padding:6px 10px; border-radius:0 7px 7px 0; margin-bottom:8px; }
-.warn-note { font-size:.75rem; font-weight:700; color:#922b21; background:#fdf0ef; border-left:3px solid #922b21; padding:6px 10px; border-radius:0 7px 7px 0; margin-bottom:8px; }
+.warn-note { font-size:.75rem; font-weight:700; color:#ca6f1e; background:#fef9f0; border-left:3px solid #ca6f1e; padding:6px 10px; border-radius:0 7px 7px 0; margin-bottom:8px; }
 .product-box { font-size:.75rem; background:#f8f8f8; border:1px solid #e0e0e0; border-radius:8px; padding:8px 10px; margin-bottom:10px; line-height:1.6; font-family:monospace; color:#444; }
 .action-btns { display:grid; grid-template-columns:1fr 1fr 1fr; gap:7px; margin-bottom:10px; }
 .abtn { display:block; padding:12px 4px; border-radius:9px; text-align:center; text-decoration:none; font-size:.7rem; font-weight:700; letter-spacing:.04em; border:none; cursor:pointer; transition:opacity .15s,transform .1s; }
@@ -103,9 +104,9 @@ header h1 { font-size:1rem; font-weight:700; letter-spacing:.08em; text-align:ce
 </head>
 <body>
 <header>
-  <h1>🌸 FRIDAY 5/8 — RUN 2</h1>
-  <div class="run-meta">TRIP 5969129 · 16 STOPS · ZONE 5B · PHOENIX / NORTH PHOENIX, AZ</div>
-  <div class="counter" id="counter">0 of 16 complete</div>
+  <h1>🌸 FRIDAY 5/8 — RUN 3</h1>
+  <div class="run-meta">TRIP 5974220 · 22 STOPS · GLENDALE / PEORIA / SUN CITY, AZ</div>
+  <div class="counter" id="counter">0 of 22 complete</div>
   <div class="controls">
     <button class="ctrl-btn" onclick="expandAll()">EXPAND ALL</button>
     <button class="ctrl-btn" onclick="collapseAll()">COLLAPSE ALL</button>
@@ -129,162 +130,201 @@ header h1 { font-size:1rem; font-weight:700; letter-spacing:.08em; text-align:ce
 <script>
 var stops = [
   {
-    num:1, name:"JOHN EARLE",
-    addr:"11056 N 10th St\nPhoenix, AZ 85020",
-    phone:"4802506628", type:"Residential",
-    order:"BMT #43608943 · Order #46781986 · Zone 5B-DD",
-    product:"Fields of Europe Spring MD: 8\" RseVse, R...",
+    num:1, name:"NICOLE MARTIN",
+    addr:"3801 W Villa Rita Dr\nGlendale, AZ 85308",
+    phone:"9288210615", type:"Residential",
+    order:"BMT #43675768 · Order #46810425 · Zone 1A-DD",
+    product:"191167L: Floral Embrace-LG: 6\" Cyl, Rose...",
     badges:[], special:null, flex_note:null, notes_pre:null
   },
   {
-    num:2, name:"SHARRON MCPARTLIN",
-    addr:"13628 N 3rd St\nPhoenix, AZ 85022",
-    phone:"7028589089", type:"Residential",
-    order:"BMT #42856725 · Order #46606762 · Zone 5B",
-    product:"Lovely Lavender Medley-LG: 6\" Cyl, Rose...",
-    badges:["sun"], special:null,
-    flex_note:"📅 FLEX — SUN 5/10 PREFERRED · FRI 5/8–SUN 5/10 ACCEPTABLE",
-    notes_pre:null
+    num:2, name:"DONNA MAYFIELD",
+    addr:"17120 N 51st Ave, Apt 6308\nGlendale, AZ 85308",
+    phone:"6232106000", type:"Apartment",
+    order:"BMT #43671914 · Order #46808355 · Zone 1A-DD",
+    product:"Lovely Lavender Medley-SM: 5\" Cyl, Rose...",
+    badges:["apt"], special:null, flex_note:null, notes_pre:null
   },
   {
-    num:3, name:"DONNA HENDRICKSON",
-    addr:"14417 N 15th St\nPhoenix, AZ 85022",
-    phone:"1807121483", type:"Residential",
-    order:"BMT #43567849 · Order #46770479 · Zone 5B",
-    product:"Amazing Mom-MD: LavVse, Rose Pk, StkLa...",
+    num:3, name:"KAREN KING",
+    addr:"5806 W Gelding Dr\nGlendale, AZ 85306",
+    phone:"4084804266", type:"Residential",
+    order:"BMT #43689977 · Order #46817996 · Zone 2A-DD",
+    product:"Mom Fields of Europe-MD: Same as PC#2...",
     badges:[], special:null, flex_note:null, notes_pre:null
   },
   {
-    num:4, name:"MARIS NEWELL",
-    addr:"13825 N Cave Creek Rd, Apt 116\nPhoenix, AZ 85022",
-    phone:"5206780439", type:"Apartment",
-    order:"BMT #42488826 · Order #46495168 · Zone 5B",
-    product:"*BUNDLE* LAVENDER GARDEN IN CLEAR 8...\nCard Isle Personalized Sku — Fruit Box",
-    badges:["apt","sun","card","fruit"], special:null,
-    flex_note:"📅 FLEX — SUN 5/10 PREFERRED · FRI 5/8–SUN 5/10 ACCEPTABLE",
-    notes_pre:"CARD ISLE ID: KM5ZA · FRUIT AND FLOWERS"
-  },
-  {
-    num:5, name:"SUSAN LUEDERS",
-    addr:"2515 E Claire Dr\nPhoenix, AZ 85032",
-    phone:"6022848270", type:"Residential",
-    order:"BMT #42830184 · Order #46600166 · Zone 5B",
-    product:"Lovely Lavender Medley-XL: 6\" Cyl, Rose...",
+    num:4, name:"GRANDMA WARNER",
+    addr:"7131 W Eugie Ave\nPeoria, AZ 85381",
+    phone:"6232487321", type:"Residential",
+    order:"BMT #43690854 · Order #46818412 · Zone 2A-DD",
+    product:"Elegant Blush Bqt-XL: 6\" Cyl, RoseWh, St...",
     badges:[], special:null, flex_note:null, notes_pre:null
   },
   {
-    num:6, name:"MEGAN ELLERSON",
-    addr:"3122 E Claire Dr\nPhoenix, AZ 85032",
-    phone:"6026282886", type:"Residential",
-    order:"BMT #42881196 · Order #46612210 · Zone 5B",
-    product:"Fields of Europe Spring DX: 8\" GthrVse,...",
-    badges:["fri"], special:"📅 DELIVER MY GIFT ON FRI 5/8 — customer requested",
+    num:5, name:"WANDA BAXTER",
+    addr:"13725 N 93rd Ave, Apt 302\nPeoria, AZ 85381",
+    phone:"6235618804", type:"Apartment",
+    order:"BMT #42325373 · Order #46429806 · Zone 2A-DD",
+    product:"Daydream Bouquet-LG: LavGlsVse, RoseP...",
+    badges:["apt"], special:null, flex_note:null, notes_pre:null
+  },
+  {
+    num:6, name:"MAXINE KROGMAN",
+    addr:"13843 N Boswell Blvd\nSun City, AZ 85351",
+    phone:"6029336761", type:"Residential",
+    order:"BMT #43142021 · Order #46674642 · Zone 2A-DD",
+    product:"Daydream Bouquet-LG: LavGlsVse, RoseP...\n⚠️ Must Include Sweet Treats-LARGE",
+    badges:["fri","choco"], special:"📅 DELIVER MY GIFT ON FRI 5/8 · 🍫 MUST INCLUDE SWEET TREATS-LARGE — verify before door",
+    flex_note:null, notes_pre:"1 CHOCO ADD-ON"
+  },
+  {
+    num:7, name:"BARBARA BRUNO",
+    addr:"10257 W Twin Oaks Dr\nSun City, AZ 85351",
+    phone:"6239338889", type:"Residential",
+    order:"BMT #43640038 · Order #46793843 · Zone 2A-DD",
+    product:"Always on My Mind-LG: 8\" GthrVse, RoseP...\nCard Isle Personalized Sku",
+    badges:["card"], special:null, flex_note:null, notes_pre:"CARD ISLE ID: 7TB7D"
+  },
+  {
+    num:8, name:"SANDY ANSETH",
+    addr:"17022 N Pinion Ln\nSun City, AZ 85373",
+    phone:"6237488902", type:"Residential",
+    order:"BMT #43665112 · Order #46804706 · Zone 1B",
+    product:"Designer Dreams Bqt-MD: PkBagVse, Foa...\n⚠️ Must Include Sweet Treats-LARGE\nCard Isle Personalized Sku",
+    badges:["card","choco"], special:"🍫 MUST INCLUDE SWEET TREATS-LARGE — verify before door",
+    flex_note:null, notes_pre:"CARD ISLE ID: 8UT4F · 1 CHOCO ADD-ON"
+  },
+  {
+    num:9, name:"CYNTHIA RODA",
+    addr:"11009 W Welk Dr\nSun City, AZ 85373",
+    phone:"5037092729", type:"Residential",
+    order:"BMT #43667944 · Order #46806216 · Zone 1B",
+    product:"Elegant Blush Bqt-XL: 6\" Cyl, RoseWh, St...\nCard Isle Personalized Sku",
+    badges:["card"], special:null, flex_note:null, notes_pre:"CARD ISLE ID: HRZUJ"
+  },
+  {
+    num:10, name:"MARY LALOGGIA",
+    addr:"18818 N Mayan Dr\nSun City, AZ 85373",
+    phone:"6024024111", type:"Residential",
+    order:"BMT #43648653 · Order #46797132 · Zone 1B",
+    product:"Always on My Mind-LG: 8\" GthrVse, RoseP...",
+    badges:[], special:null, flex_note:null, notes_pre:null
+  },
+  {
+    num:11, name:"TERESA SORENSON",
+    addr:"10145 W Ross Ave\nPeoria, AZ 85382",
+    phone:"3602136400", type:"Residential",
+    order:"FTD Order #73521X2631C-7444 · HOLIDAY · Zone 1B",
+    product:"#1 T37-1d T37-1: Pink and white roses...",
+    badges:["ftd"], special:null, flex_note:null, notes_pre:"FTD NL ORDER"
+  },
+  {
+    num:12, name:"ROSE OLSON",
+    addr:"9579 W Harmony Ln\nPeoria, AZ 85382",
+    phone:"6235811876", type:"Residential",
+    order:"BMT #43439476 · Order #46734333 · Zone 1B",
+    product:"Always on My Mind-LG: 8\" GthrVse, RoseP...",
+    badges:["fri"], special:"📅 FLEX — FRI 5/8 PREFERRED · THU 5/7–FRI 5/8 ACCEPTABLE",
     flex_note:null, notes_pre:null
   },
   {
-    num:7, name:"LAMAR MILLER",
-    addr:"2837 E Louise Dr\nPhoenix, AZ 85032",
-    phone:"4802470067", type:"Residential",
-    order:"BMT #43542661 · Order #46764584 · Zone 5B",
-    product:"Floral Embrace-LG: 6\" Cyl, RoseHtPk, Ast...",
-    badges:["ill"], special:null,
-    flex_note:null, notes_pre:"⚠️ ILLNESS/GET WELL — handle with care"
-  },
-  {
-    num:8, name:"CATHY MCDONOUGH",
-    addr:"12655 N 35th Pl\nPhoenix, AZ 85032",
-    phone:"6028288575", type:"Residential",
-    order:"BMT #43239108 · Order #46695947 · Zone 5B",
-    product:"Designer Dreams Bqt-MD: PkBagVse, Foa...",
-    badges:["sun"], special:null,
-    flex_note:"📅 FLEX — SUN 5/10 PREFERRED · FRI 5/8–SUN 5/10 ACCEPTABLE",
-    notes_pre:null
-  },
-  {
-    num:9, name:"ROBERTA WOLF",
-    addr:"4303 E Cactus Rd, Building 7, Unit 204\nPhoenix, AZ 85032",
-    phone:"8472127405", type:"Residential",
-    order:"BMT #43331524 · Order #46716157 · Zone 5B",
-    product:"Floral Embrace-LG: 6\" Cyl, RoseHtPk, Ast...",
-    badges:["sun"], special:null,
-    flex_note:"📅 FLEX — SUN 5/10 PREFERRED · FRI 5/8–SUN 5/10 ACCEPTABLE",
-    notes_pre:null
-  },
-  {
-    num:10, name:"JANET LOCKE",
-    addr:"4629 E Sandra Ter\nPhoenix, AZ 85032",
-    phone:"6027170531", type:"Residential",
-    order:"BMT #43461143 · Order #46740051 · Zone 5B",
-    product:"Vibrant Floral Medley-SM: 8\" RseVse, Ro...",
-    badges:["sat"], special:null,
-    flex_note:"📅 FLEX — SAT 5/9 PREFERRED · FRI 5/8–SUN 5/10 ACCEPTABLE",
-    notes_pre:null
-  },
-  {
-    num:11, name:"ALYSSA POIROT",
-    addr:"4127 E Anderson Dr\nPhoenix, AZ 85032",
-    phone:"9492956967", type:"Residential",
-    order:"BMT #43584311 · Order #46774982 · Zone 5B",
-    product:"Florists Choice-Birthday-LG: Fill to ...",
+    num:13, name:"LINDA PITZER",
+    addr:"9821 W Menadota Dr\nPeoria, AZ 85382",
+    phone:"6026191416", type:"Residential",
+    order:"BMT #43628453 · Order #46788762 · Zone 1B",
+    product:"Elegant Blush Bqt-LG: 6\" Cyl, RoseWh, St...",
     badges:[], special:null, flex_note:null, notes_pre:null
   },
   {
-    num:12, name:"MARY CARROLL",
-    addr:"2908 E Libby St\nPhoenix, AZ 85032",
-    phone:"9103825915", type:"Residential",
-    order:"BMT #43485396 · Order #46746660 · Zone 5B",
-    product:"Designer Dreams Bqt-LG: PkBagVse, Foa...",
-    badges:[], special:null, flex_note:null, notes_pre:null
-  },
-  {
-    num:13, name:"MAXINE BASKERVILLE",
-    addr:"1830 E Kathleen Rd\nPhoenix, AZ 85022",
-    phone:"6029716556", type:"Residential",
-    order:"BMT #43183779 · Order #46683706 · Zone 5B",
-    product:"*BUNDLE* PREMADE LG FIELDS OF EUROPE...\nCard Isle Personalized Sku — Fruit Box",
-    badges:["sat","card","fruit"], special:null,
-    flex_note:"📅 FLEX — SAT 5/9 PREFERRED · FRI 5/8–SUN 5/10 ACCEPTABLE",
-    notes_pre:"CARD ISLE ID: H4R8Y · FRUIT N FLOWERS"
-  },
-  {
-    num:14, name:"NIEVES PERDIGONES",
-    addr:"1302 E Monte Cristo Ave\nPhoenix, AZ 85022",
-    phone:"9084039185", type:"Residential",
-    order:"BMT #43547154 · Order #46766069 · Zone 5B",
+    num:14, name:"SUR SANNER",
+    addr:"8469 W Escuda Dr\nPeoria, AZ 85382",
+    phone:"3039159906", type:"Residential",
+    order:"BMT #43680955 · Order #46813302 · Zone 1B",
     product:"Lovely Lavender Medley-SM: 5\" Cyl, Rose...",
     badges:[], special:null, flex_note:null, notes_pre:null
   },
   {
-    num:15, name:"SANDY SHAPIRO",
-    addr:"331 E Monte Cristo Ave\nPhoenix, AZ 85022",
-    phone:"8015565429", type:"Residential",
-    order:"BMT #43431780 · Order #46732329 · Zone 5B",
-    product:"Floral Embrace-LG: 6\" Cyl, RoseHtPk, Ast...\nCard Isle Personalized Sku",
-    badges:["sun","card"], special:null,
-    flex_note:"📅 FLEX — SUN 5/10 PREFERRED · FRI 5/8–SUN 5/10 ACCEPTABLE",
-    notes_pre:"CARD ISLE ID: Y8YMD"
+    num:15, name:"SARY TAVRYTZKY",
+    addr:"18441 N 87th Ave, Apt 270\nPeoria, AZ 85382",
+    phone:"6022922068", type:"Apartment",
+    order:"BMT #43639982 · Order #46793723 · Zone 1B",
+    product:"Lovely Lavender Medley-MD: 5\" Cyl, Rose...",
+    badges:["apt"], special:null, flex_note:null, notes_pre:null
   },
   {
-    num:16, name:"JUDY GROFF",
-    addr:"822 E Morningside Dr\nPhoenix, AZ 85022",
-    phone:"4807094521", type:"Residential",
-    order:"BMT #42814517 · Order #46595246 · Zone 5B",
-    product:"Floral Embrace-XL: 6\" Cyl, RoseHtPk, Ast...",
-    badges:["sun"], special:null,
-    flex_note:"📅 FLEX — SUN 5/10 PREFERRED · FRI 5/8–SUN 5/10 ACCEPTABLE",
-    notes_pre:null
+    num:16, name:"PATRICIA PADILLA SUMA",
+    addr:"8740 W Kings Ave\nPeoria, AZ 85382",
+    phone:"6236969292", type:"Residential",
+    order:"BMT #43689375 · Order #46817625 · Zone 1B",
+    product:"Mother's Embrace-XL: PkCeramicVse(N...\n⚠️ Must Include Add On: One 'Happy...'",
+    badges:["addon","mylar"], special:"⚠️ ADD-ON REQUIRED: 1 MDAY MYLAR — verify before door",
+    flex_note:null, notes_pre:"1 MDAY MYLAR ADD-ON"
+  },
+  {
+    num:17, name:"JANET BROWN",
+    addr:"8767 W Paradise Ln\nPeoria, AZ 85382",
+    phone:"2164707120", type:"Residential",
+    order:"BMT #43340394 · Order #46717763 · Zone 1B",
+    product:"Always on My Mind-XL: 8\" GthrVse, RoseP...\n⚠️ Must Include Add On: One 'Happy...'",
+    badges:["sat","addon"], special:"⚠️ ADD-ON REQUIRED: 1 HMD — verify before door",
+    flex_note:"📅 FLEX — SAT 5/9 PREFERRED · FRI 5/8–SUN 5/10 ACCEPTABLE",
+    notes_pre:"1 HMD ADD-ON"
+  },
+  {
+    num:18, name:"ANNA VILLAGOMEZ",
+    addr:"8608 W Paradise Ln\nPeoria, AZ 85382",
+    phone:"6307850168", type:"Residential",
+    order:"BMT #43603943 · Order #46780228 · Zone 1B",
+    product:"Always on My Mind-XL: 8\" GthrVse, RoseP...",
+    badges:[], special:null, flex_note:null, notes_pre:null
+  },
+  {
+    num:19, name:"CHANDRA WATI",
+    addr:"17374 N 89th Ave, Apt 1402\nPeoria, AZ 85382",
+    phone:"4802058711", type:"Apartment",
+    order:"BMT #43679553 · Order #46812539 · Zone 1B",
+    product:"Amazing Mom-SM: LavVse, Rose Pk, CrmnP...\n⚠️ Must Include Add On: One 'I Lov...'",
+    badges:["apt","addon"], special:"⚠️ ADD-ON REQUIRED: 1 ILY — verify before door",
+    flex_note:null, notes_pre:"1 ILY ADD-ON"
+  },
+  {
+    num:20, name:"RYAN AND REBECCA FUDURICH",
+    addr:"18393 N 88th Dr\nPeoria, AZ 85382",
+    phone:"6237347683", type:"Residential",
+    order:"BMT #43666155 · Order #46805269 · Zone 1B",
+    product:"Loving Sentiments Blue and White-XL: ...\nCard Isle Personalized Sku",
+    badges:["card"], special:null, flex_note:null, notes_pre:"CARD ISLE ID: 3Y5BA"
+  },
+  {
+    num:21, name:"DAHLIA GONZALEZ",
+    addr:"18330 N 79th Ave, Apt 1021\nGlendale, AZ 85308",
+    phone:"6024875580", type:"Apartment",
+    order:"BMT #43663417 · Order #46803728 · Zone 1A-DD",
+    product:"Elegant Blush Bqt-XL: 6\" Cyl, RoseWh, St...",
+    badges:["apt"], special:null, flex_note:null, notes_pre:null
+  },
+  {
+    num:22, name:"SARAH GITTINGS",
+    addr:"6745 W Monona Dr\nGlendale, AZ 85308",
+    phone:"6237344715", type:"Residential",
+    order:"BMT #43687511 · Order #46816667 · Zone 1A-DD",
+    product:"Designer Dreams Bqt-MD: PkBagVse, Foa...\n⚠️ Must Include Add On: One 'Happy...'\n⚠️ Must Include Sweet Treats-LARGE",
+    badges:["addon","choco"], special:"⚠️ ADD-ON REQUIRED: 1 HMD + 1 CHOCO — verify BOTH before door",
+    flex_note:null, notes_pre:"1 HMD + 1 CHOCO ADD-ON"
   }
 ];
 
 var badgeDefs = {
   apt:   {cls:"b-apt",  label:"🏠 APARTMENT"},
-  flex:  {cls:"b-flex", label:"📅 FLEX"},
   card:  {cls:"b-card", label:"💌 CARD ISLE"},
-  fruit: {cls:"b-fruit",label:"🍓 FRUIT INCLUDED"},
-  fri:   {cls:"b-fri",  label:"✅ DELIVER FRI 5/8"},
+  addon: {cls:"b-addon",label:"🎁 ADD-ON REQUIRED"},
+  choco: {cls:"b-choco",label:"🍫 SWEET TREATS"},
+  ftd:   {cls:"b-ftd",  label:"💜 FTD ORDER"},
+  fri:   {cls:"b-fri",  label:"✅ FRI 5/8"},
   sat:   {cls:"b-sat",  label:"📅 PREF SAT 5/9"},
-  sun:   {cls:"b-sun",  label:"📅 PREF SUN 5/10"},
-  ill:   {cls:"b-ill",  label:"🤒 GET WELL"}
+  flex:  {cls:"b-flex", label:"📅 FLEX"},
+  mylar: {cls:"b-mylar",label:"🎈 MYLAR BALLOON"}
 };
 
 var state={};
