@@ -3,11 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>🌸 Nicole's Delivery Run 2</title>
+<title>🌸 Nicole – Fri 5/8 Run 1</title>
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 :root {
   --red: #c0392b; --yellow: #d4860a; --green: #1e8449; --blue: #1a5276;
+  --purple: #6c3483; --orange: #ca6f1e;
   --red-bg: #fdf0ef; --yellow-bg: #fef9f0; --green-bg: #edfaf1; --blue-bg: #eaf4fb;
   --text: #1a1a1a; --sub: #666;
 }
@@ -15,9 +16,10 @@ body { font-family: -apple-system,'Helvetica Neue',sans-serif; background:#eee9e
 header { background:#1a1a2e; color:white; padding:14px 12px 0; position:sticky; top:0; z-index:200; box-shadow:0 3px 14px rgba(0,0,0,.4); }
 header h1 { font-size:1rem; font-weight:700; letter-spacing:.08em; text-align:center; }
 .run-meta { font-size:.68rem; opacity:.6; text-align:center; margin-top:2px; font-family:monospace; }
+.early-warn { font-size:.68rem; background:rgba(192,57,43,.3); border:1px solid rgba(192,57,43,.5); border-radius:6px; text-align:center; padding:5px 8px; margin:6px 0 4px; color:#ffcccc; font-weight:700; }
 .counter { text-align:center; font-size:.7rem; color:rgba(255,255,255,.65); font-family:monospace; margin:5px 0 7px; }
 .controls { display:flex; gap:5px; padding:7px 0 10px; }
-.ctrl-btn { flex:1; padding:8px 2px; border:1px solid rgba(255,255,255,.25); background:rgba(255,255,255,.07); color:white; border-radius:7px; font-size:.6rem; font-weight:600; cursor:pointer; letter-spacing:.03em; }
+.ctrl-btn { flex:1; padding:8px 2px; border:1px solid rgba(255,255,255,.25); background:rgba(255,255,255,.07); color:white; border-radius:7px; font-size:.6rem; font-weight:600; cursor:pointer; }
 .ctrl-btn:active { background:rgba(255,255,255,.2); }
 .ctrl-btn.green { background:rgba(39,174,96,.25); border-color:#27ae60; }
 .progress-bar { height:4px; background:rgba(255,255,255,.15); }
@@ -34,10 +36,7 @@ header h1 { font-size:1rem; font-weight:700; letter-spacing:.08em; text-align:ce
 .stop-name { font-size:.9rem; font-weight:700; color:var(--text); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 .stop-sub  { font-size:.62rem; color:var(--sub); font-family:monospace; margin-top:1px; }
 .otag { font-size:.6rem; font-weight:700; padding:3px 7px; border-radius:20px; color:white; white-space:nowrap; flex-shrink:0; }
-.otag-delivered { background:var(--green); }
-.otag-lop       { background:var(--blue); }
-.otag-undeliv   { background:var(--red); }
-.otag-texted    { background:var(--yellow); }
+.otag-delivered{background:var(--green);} .otag-lop{background:var(--blue);} .otag-undeliv{background:var(--red);} .otag-texted{background:var(--yellow);}
 .chev { font-size:.75rem; color:#bbb; transition:transform .25s; flex-shrink:0; }
 .card.collapsed .chev { transform:rotate(-90deg); }
 .card-body { padding:0 12px 13px; border-top:1px solid rgba(0,0,0,.06); }
@@ -46,67 +45,72 @@ header h1 { font-size:1rem; font-weight:700; letter-spacing:.08em; text-align:ce
 .order-line { font-size:.7rem; font-family:monospace; color:#888; margin-bottom:10px; }
 .badges { display:flex; flex-wrap:wrap; gap:5px; margin-bottom:10px; }
 .badge { font-size:.62rem; font-weight:700; padding:3px 9px; border-radius:20px; color:white; }
-.b-apt  { background:#7d3c98; }
-.b-biz  { background:#1a5276; }
-.b-time { background:#c0392b; }
-.b-card { background:#1a5276; }
-.b-novase { background:#6d4c41; }
-.b-dd   { background:#2e7d32; }
-.special-note { font-size:.75rem; font-weight:700; color:#c0392b; background:#fdf0ef; border-left:3px solid #c0392b; padding:6px 10px; border-radius:0 7px 7px 0; margin-bottom:10px; }
-.info-note { font-size:.75rem; font-weight:700; color:#1a5276; background:#eaf4fb; border-left:3px solid #1a5276; padding:6px 10px; border-radius:0 7px 7px 0; margin-bottom:10px; }
+.b-apt    { background:#7d3c98; }
+.b-biz    { background:#1a5276; }
+.b-school { background:#0e6655; }
+.b-mat    { background:#784212; }
+.b-time   { background:#c0392b; }
+.b-flex   { background:#717d7e; }
+.b-card   { background:#1a5276; }
+.b-ftd    { background:#6c3483; }
+.b-fri    { background:#1e8449; }
+.b-sat    { background:#ca6f1e; }
+.b-sun    { background:#2471a3; }
+.special-note { font-size:.75rem; font-weight:700; color:#c0392b; background:#fdf0ef; border-left:3px solid #c0392b; padding:6px 10px; border-radius:0 7px 7px 0; margin-bottom:8px; }
+.flex-note { font-size:.75rem; font-weight:700; color:#717d7e; background:#f4f6f7; border-left:3px solid #aab; padding:6px 10px; border-radius:0 7px 7px 0; margin-bottom:8px; }
+.info-note { font-size:.75rem; font-weight:700; color:#1a5276; background:#eaf4fb; border-left:3px solid #1a5276; padding:6px 10px; border-radius:0 7px 7px 0; margin-bottom:8px; }
 .product-box { font-size:.75rem; background:#f8f8f8; border:1px solid #e0e0e0; border-radius:8px; padding:8px 10px; margin-bottom:10px; line-height:1.6; font-family:monospace; color:#444; }
 .action-btns { display:grid; grid-template-columns:1fr 1fr 1fr; gap:7px; margin-bottom:10px; }
 .abtn { display:block; padding:12px 4px; border-radius:9px; text-align:center; text-decoration:none; font-size:.7rem; font-weight:700; letter-spacing:.04em; border:none; cursor:pointer; transition:opacity .15s,transform .1s; }
 .abtn:active { opacity:.75; transform:scale(.97); }
-.abtn-nav  { background:#1a1a2e; color:white; }
-.abtn-text { background:#1e8449; color:white; }
-.abtn-call { background:#1a5276; color:white; }
+.abtn-nav{background:#1a1a2e;color:white;} .abtn-text{background:#1e8449;color:white;} .abtn-call{background:#1a5276;color:white;}
 .status-row { display:flex; gap:6px; margin-bottom:10px; }
-.sbtn { flex:1; padding:8px 3px; border-radius:8px; border:2px solid transparent; font-size:.62rem; font-weight:700; cursor:pointer; transition:all .18s; letter-spacing:.03em; text-align:center; }
-.sbtn-y { background:#fef3e2; color:var(--yellow); border-color:var(--yellow); }
-.sbtn-y.active { background:var(--yellow); color:white; }
+.sbtn { flex:1; padding:8px 3px; border-radius:8px; border:2px solid transparent; font-size:.62rem; font-weight:700; cursor:pointer; transition:all .18s; text-align:center; }
+.sbtn-y{background:#fef3e2;color:var(--yellow);border-color:var(--yellow);}
+.sbtn-y.active{background:var(--yellow);color:white;}
 .outcome-label { font-size:.65rem; font-weight:700; color:var(--sub); letter-spacing:.06em; text-transform:uppercase; margin-bottom:6px; font-family:monospace; }
 .outcome-row { display:grid; grid-template-columns:1fr 1fr 1fr; gap:6px; margin-bottom:10px; }
 .obtn { padding:11px 4px; border-radius:9px; border:2px solid transparent; font-size:.65rem; font-weight:700; cursor:pointer; text-align:center; transition:all .18s; line-height:1.3; }
-.obtn:active { transform:scale(.96); }
-.obtn-d { background:#eafaf1; color:var(--green); border-color:var(--green); }
-.obtn-d.active { background:var(--green); color:white; }
-.obtn-l { background:#eaf4fb; color:var(--blue); border-color:var(--blue); }
-.obtn-l.active { background:var(--blue); color:white; }
-.obtn-u { background:#fdf0ef; color:var(--red); border-color:var(--red); }
-.obtn-u.active { background:var(--red); color:white; }
-.ts-line { font-size:.68rem; font-family:monospace; font-weight:700; margin-bottom:8px; display:none; }
-.ts-line.show { display:block; }
-.ts-d { color:var(--green); } .ts-l { color:var(--blue); } .ts-u { color:var(--red); }
-.notes-label { font-size:.65rem; font-weight:700; color:var(--sub); letter-spacing:.06em; text-transform:uppercase; margin-bottom:4px; font-family:monospace; }
-.notes-in { width:100%; padding:8px 10px; border:1px solid #ddd; border-radius:8px; font-size:.82rem; background:rgba(255,255,255,.85); color:var(--text); resize:none; font-family:monospace; line-height:1.45; margin-bottom:7px; }
-.notes-in:focus { outline:none; border-color:#aaa; background:white; }
-.undeliv-in { display:none; width:100%; padding:8px 10px; border:1px solid var(--red); border-radius:8px; font-size:.82rem; background:#fff8f8; color:var(--text); resize:none; font-family:monospace; line-height:1.45; }
-.undeliv-in.show { display:block; }
-.summary-section { margin:16px 10px 0; border-radius:13px; overflow:hidden; border:2px solid #1a1a2e; background:white; box-shadow:0 2px 10px rgba(0,0,0,.1); }
-.summary-head { background:#1a1a2e; color:white; padding:13px 14px; text-align:center; }
-.summary-head h2 { font-size:.9rem; letter-spacing:.08em; }
-.summary-head p  { font-size:.68rem; opacity:.6; margin-top:3px; font-family:monospace; }
-.sum-group-title { font-size:.65rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:white; padding:6px 14px; font-family:monospace; }
-.sg-delivered { background:var(--green); } .sg-lop { background:var(--blue); } .sg-undeliv { background:var(--red); } .sg-pending { background:#888; }
-.sum-row { display:flex; align-items:flex-start; padding:10px 14px; border-bottom:1px solid #f0f0f0; gap:10px; }
-.sum-row:last-child { border-bottom:none; }
-.sum-num { font-size:.78rem; font-weight:800; color:#aaa; min-width:20px; font-family:monospace; padding-top:1px; }
-.sum-info { flex:1; }
-.sum-name { font-size:.82rem; font-weight:700; color:var(--text); }
-.sum-time { font-size:.68rem; font-family:monospace; color:var(--sub); margin-top:2px; }
-.sum-note { font-size:.68rem; font-family:monospace; color:#888; margin-top:2px; font-style:italic; }
-.sum-tag { font-size:.6rem; font-weight:700; padding:3px 8px; border-radius:20px; color:white; white-space:nowrap; flex-shrink:0; }
-.st-d { background:var(--green); } .st-l { background:var(--blue); } .st-u { background:var(--red); } .st-p { background:#aaa; }
-.refresh-btn { display:block; width:calc(100% - 24px); margin:12px auto; padding:12px; background:#1a1a2e; color:white; border:none; border-radius:10px; font-size:.8rem; font-weight:700; cursor:pointer; letter-spacing:.05em; text-align:center; }
-.refresh-btn:active { opacity:.8; }
+.obtn:active{transform:scale(.96);}
+.obtn-d{background:#eafaf1;color:var(--green);border-color:var(--green);}
+.obtn-d.active{background:var(--green);color:white;}
+.obtn-l{background:#eaf4fb;color:var(--blue);border-color:var(--blue);}
+.obtn-l.active{background:var(--blue);color:white;}
+.obtn-u{background:#fdf0ef;color:var(--red);border-color:var(--red);}
+.obtn-u.active{background:var(--red);color:white;}
+.ts-line{font-size:.68rem;font-family:monospace;font-weight:700;margin-bottom:8px;display:none;}
+.ts-line.show{display:block;}
+.ts-d{color:var(--green);} .ts-l{color:var(--blue);} .ts-u{color:var(--red);}
+.notes-label{font-size:.65rem;font-weight:700;color:var(--sub);letter-spacing:.06em;text-transform:uppercase;margin-bottom:4px;font-family:monospace;}
+.notes-in{width:100%;padding:8px 10px;border:1px solid #ddd;border-radius:8px;font-size:.82rem;background:rgba(255,255,255,.85);color:var(--text);resize:none;font-family:monospace;line-height:1.45;margin-bottom:7px;}
+.notes-in:focus{outline:none;border-color:#aaa;background:white;}
+.undeliv-in{display:none;width:100%;padding:8px 10px;border:1px solid var(--red);border-radius:8px;font-size:.82rem;background:#fff8f8;color:var(--text);resize:none;font-family:monospace;line-height:1.45;}
+.undeliv-in.show{display:block;}
+.summary-section{margin:16px 10px 0;border-radius:13px;overflow:hidden;border:2px solid #1a1a2e;background:white;box-shadow:0 2px 10px rgba(0,0,0,.1);}
+.summary-head{background:#1a1a2e;color:white;padding:13px 14px;text-align:center;}
+.summary-head h2{font-size:.9rem;letter-spacing:.08em;}
+.summary-head p{font-size:.68rem;opacity:.6;margin-top:3px;font-family:monospace;}
+.sum-group-title{font-size:.65rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:white;padding:6px 14px;font-family:monospace;}
+.sg-delivered{background:var(--green);} .sg-lop{background:var(--blue);} .sg-undeliv{background:var(--red);} .sg-pending{background:#888;}
+.sum-row{display:flex;align-items:flex-start;padding:10px 14px;border-bottom:1px solid #f0f0f0;gap:10px;}
+.sum-row:last-child{border-bottom:none;}
+.sum-num{font-size:.78rem;font-weight:800;color:#aaa;min-width:20px;font-family:monospace;padding-top:1px;}
+.sum-info{flex:1;}
+.sum-name{font-size:.82rem;font-weight:700;color:var(--text);}
+.sum-time{font-size:.68rem;font-family:monospace;color:var(--sub);margin-top:2px;}
+.sum-note{font-size:.68rem;font-family:monospace;color:#888;margin-top:2px;font-style:italic;}
+.sum-tag{font-size:.6rem;font-weight:700;padding:3px 8px;border-radius:20px;color:white;white-space:nowrap;flex-shrink:0;}
+.st-d{background:var(--green);} .st-l{background:var(--blue);} .st-u{background:var(--red);} .st-p{background:#aaa;}
+.refresh-btn{display:block;width:calc(100% - 24px);margin:12px auto;padding:12px;background:#1a1a2e;color:white;border:none;border-radius:10px;font-size:.8rem;font-weight:700;cursor:pointer;letter-spacing:.05em;text-align:center;}
+.refresh-btn:active{opacity:.8;}
 </style>
 </head>
 <body>
 <header>
-  <h1>🌸 NICOLE'S DELIVERY RUN 2</h1>
-  <div class="run-meta">THURSDAY, MAY 7, 2026 · TRIP 5962331 · 10 STOPS · PHOENIX / LAVEEN, AZ</div>
-  <div class="counter" id="counter">0 of 10 complete</div>
+  <h1>🌸 FRIDAY 5/8 — RUN 1</h1>
+  <div class="run-meta">TRIP 5963125 · 25 STOPS · ZONE 1A-DD · GLENDALE, AZ · 5AM START</div>
+  <div class="early-warn">⏰ 5AM START — Text for gate/apt codes TONIGHT!</div>
+  <div class="counter" id="counter">0 of 25 complete</div>
   <div class="controls">
     <button class="ctrl-btn" onclick="expandAll()">EXPAND ALL</button>
     <button class="ctrl-btn" onclick="collapseAll()">COLLAPSE ALL</button>
@@ -130,142 +134,298 @@ header h1 { font-size:1rem; font-weight:700; letter-spacing:.08em; text-align:ce
 <script>
 var stops = [
   {
-    num:1, name:"DESTINEE KILE",
-    addr:"5624 S 6th St, Apt 2\nPhoenix, AZ 85040",
-    phone:"6236959809", type:"Apartment",
-    order:"BMT #43427756 · Order #46731408 · Zone 7B",
-    product:"Floral Embrace-LG: 6\" Cyl, RoseHtPk, Ast...",
-    badges:["apt"], special:null, notes_pre:null
+    num:1, name:"AVANNA RIBITZKI",
+    addr:"17120 N 51st Ave, Apt 7403\nGlendale, AZ 85308",
+    phone:"4803907810", type:"Apartment",
+    order:"BMT #43138380 · Order #46673732 · Zone 1A-DD",
+    product:"Designer Dreams Bqt-MD: PkBagVse, Foa...",
+    badges:["apt","fri"], special:"📅 DELIVER MY GIFT ON FRI 5/8 — customer requested",
+    flex_note:null, notes_pre:null
   },
   {
-    num:2, name:"ASHLEY GRANT",
-    addr:"4725 W South Mountain Rd\nLaveen, AZ 85339",
-    phone:"6028314659", type:"Residential",
-    order:"BMT #43353323 · Order #46719802 · Zone 3B",
-    product:"Daydream Bouquet-MD: LavGlsVse, RoseP...",
-    badges:[], special:null, notes_pre:null
+    num:2, name:"MIKAYLA JELLAH",
+    addr:"Pinnacle Fertility\n17612 N 59th Ave, Ste 100\nGlendale, AZ 85308",
+    phone:"4804152954", type:"Business",
+    order:"BMT #43510070 · Order #46754513 · Zone 1A-DD",
+    product:"Designer Dreams Bqt-SM: PkBagVse, Foa...",
+    badges:["biz","time"], special:"⏰ DELIVER BEFORE 5 PM — Business (Fertility Clinic), call ahead",
+    flex_note:null, notes_pre:null
   },
   {
-    num:3, name:"SANDRA VALLE",
-    addr:"5754 W Gwen St\nLaveen, AZ 85339",
-    phone:"4803864903", type:"Residential",
-    order:"BMT #43467550 · Order #46741738 · Zone 3B",
-    product:"Lavender & White Peace, Prayers & Ble...\nCard Isle Personalized Sku",
-    badges:["card"], special:null, notes_pre:"CARD ISLE ID: DE464"
+    num:3, name:"THERESA MCDOWELL BLANKEN",
+    addr:"6367 W Grovers Ave\nGlendale, AZ 85308",
+    phone:"9739791423", type:"Residential",
+    order:"BMT #43254054 · Order #46699303 · Zone 1A-DD",
+    product:"Designer Dreams Bqt-LG: Same as PC 2...",
+    badges:["fri"], special:"📅 DELIVER MY GIFT ON FRI 5/8 — customer requested",
+    flex_note:null, notes_pre:null
   },
   {
-    num:4, name:"JANOONIE GELINAS",
-    addr:"8105 S 73rd Dr\nLaveen, AZ 85339",
-    phone:"6237030361", type:"Residential",
-    order:"BMT #42300894 · Order #46418323 · Zone 3B",
-    product:"**BUNDLE** Celebrate the Day-SM: Celeb...\nCard Isle Personalized Sku",
-    badges:["card"], special:null, notes_pre:"CARD ISLE ID: AKSKG 1 HBD"
-  },
-  {
-    num:5, name:"LUZ CHACON",
-    addr:"7021 W St Catherine Ave\nLaveen, AZ 85339",
-    phone:"4803697466", type:"Residential",
-    order:"BMT #43510275 · Order #46754521 · Zone 3B",
-    product:"**NO VASE** — Bouquet Only in Kraft Paper...",
-    badges:["novase"], special:"⚠️ NO VASE — Bouquet only in Kraft Paper. Verify before door.",
+    num:4, name:"JOAN THOMPSON",
+    addr:"Orchard Pointe at Arrowhead\n17200 N 67th Ave, MS #11\nGlendale, AZ 85308",
+    phone:"6233034889", type:"Business",
+    order:"BMT #43446566 · Order #46736125 · Zone 1A-DD",
+    product:"Spring Sentiment Bqt-MD: RstcCbe, Foa...",
+    badges:["biz","sun","time"], special:"⏰ BEFORE 5 PM · 🏢 Facility — check in at front desk",
+    flex_note:"📅 FLEX — SUN 5/10 PREFERRED · FRI 5/8–SUN 5/10 ACCEPTABLE",
     notes_pre:null
   },
   {
-    num:6, name:"GABRIELLE BARBOSA",
-    addr:"6037 W Wood St\nPhoenix, AZ 85043",
-    phone:"6024996451", type:"Residential",
-    order:"BMT #43452175 · Order #46737741 · Zone 3B-DD",
-    product:"Floral Embrace-SM: 5\" Cyl, AstcLilOrg, S...",
-    badges:["dd"], special:null, notes_pre:null
-  },
-  {
-    num:7, name:"CYNTHIA RAMIREZ McLANE",
-    addr:"7600 W Roosevelt St\nPhoenix, AZ 85043",
-    phone:"6235479558", type:"Business",
-    order:"BMT #43381590 · Order #46724241 · Zone 3B-DD",
-    product:"Mother's Embrace-XL: PkCeramicVse(N...",
-    badges:["biz","time"], special:"⏰ DELIVER BEFORE 5 PM — Business location, call ahead",
+    num:5, name:"LAVERNE ROBBINS",
+    addr:"17267 N 66th Dr\nGlendale, AZ 85308",
+    phone:"6025240012", type:"Residential",
+    order:"BMT #43501537 · Order #46751266 · Zone 1A-DD",
+    product:"Daydream Bouquet-SM: LavGlsVse, RoseP...",
+    badges:["sun"], special:null,
+    flex_note:"📅 FLEX — SUN 5/10 PREFERRED · FRI 5/8–SUN 5/10 ACCEPTABLE",
     notes_pre:null
   },
   {
-    num:8, name:"NORMA GUEBARA",
-    addr:"3139 N 77th Ln\nPhoenix, AZ 85033",
-    phone:"4803096165", type:"Residential",
-    order:"BMT #43460516 · Order #46739887 · Zone 3B-DD",
-    product:"Fields of Europe Spring MD: 8\" RseVse, R...",
-    badges:["dd"], special:null, notes_pre:null
+    num:6, name:"JOHANNA MARTINEZ",
+    addr:"17433 N 66th Ave\nGlendale, AZ 85308",
+    phone:"3057814971", type:"Residential",
+    order:"BMT #43505594 · Order #46752502 · Zone 1A-DD",
+    product:"Lovely Lavender Medley-MD: 5\" Cyl, Rose...\nCard Isle Personalized Sku",
+    badges:["card"], special:null,
+    flex_note:null, notes_pre:"CARD ISLE ID: GGXHC"
   },
   {
-    num:9, name:"SANDY BISHOP",
-    addr:"4239 N 67th Ln\nPhoenix, AZ 85033",
-    phone:"6236945152", type:"Residential",
-    order:"BMT #43280435 · Order #46705354 · Zone 3B-DD",
-    product:"Daydream Bouquet-MD: LavGlsVse, RoseP...\nCard Isle Personalized Sku",
-    badges:["card","dd"], special:null, notes_pre:"CARD ISLE ID: MH3BY"
+    num:7, name:"ROSALEE COLLIER",
+    addr:"6741 W Robert E Lee St\nGlendale, AZ 85308",
+    phone:"8165602259", type:"Residential",
+    order:"BMT #43484752 · Order #46746466 · Zone 1A-DD",
+    product:"Daydream Bouquet-LG: LavGlsVse, RoseP...",
+    badges:[], special:null,
+    flex_note:null, notes_pre:null
   },
   {
-    num:10, name:"ANITA WILLIAMS",
-    addr:"5332 W Vernon Ave\nPhoenix, AZ 85035",
-    phone:"6023806440", type:"Residential",
-    order:"BMT #43467253 · Order #46741569 · Zone 3B",
+    num:8, name:"LORI BRINEGAR",
+    addr:"7014 W McRae Way\nGlendale, AZ 85308",
+    phone:"6234180210", type:"Residential",
+    order:"BMT #43298530 · Order #46709431 · Zone 1A-DD",
+    product:"Daydream Bouquet-LG: LavGlsVse, RoseP...",
+    badges:["sun"], special:null,
+    flex_note:"📅 FLEX — SUN 5/10 PREFERRED · FRI 5/8–SUN 5/10 ACCEPTABLE",
+    notes_pre:null
+  },
+  {
+    num:9, name:"LU HIMMELSTEIN",
+    addr:"6916 W Kerry Ln\nGlendale, AZ 85308",
+    phone:"6236702612", type:"Residential",
+    order:"BMT #43478754 · Order #46744808 · Zone 1A-DD",
+    product:"Floral Embrace-MD: 5\" Cyl, RoseHtPk, Ast...",
+    badges:["sun"], special:null,
+    flex_note:"📅 FLEX — SUN 5/10 PREFERRED · FRI 5/8–SUN 5/10 ACCEPTABLE",
+    notes_pre:null
+  },
+  {
+    num:10, name:"ANEL ATILANO",
+    addr:"7701 W Saint John Rd, Apt 2224\nGlendale, AZ 85308",
+    phone:"7145853333", type:"Apartment",
+    order:"BMT #43004543 · Order #46640746 · Zone 1A-DD",
+    product:"Designer Dreams Bqt-LG: PkBagVse, Foa...\nCard Isle Personalized Sku",
+    badges:["apt","sat","card"], special:null,
+    flex_note:"📅 FLEX — SAT 5/9 PREFERRED · FRI 5/8–SUN 5/10 ACCEPTABLE",
+    notes_pre:"CARD ISLE ID: S86WU"
+  },
+  {
+    num:11, name:"JUDY TRAUGOTT",
+    addr:"7861 W Tonto Dr\nGlendale, AZ 85308",
+    phone:"6235729458", type:"Residential",
+    order:"FTD Order #7301SD8791H-6938 · HOLIDAY · Zone 1A-DD",
+    product:"#1 V5585D-LV Pink Roses & Lilies, pur...",
+    badges:["ftd"], special:null,
+    flex_note:null, notes_pre:"FTD NL ORDER"
+  },
+  {
+    num:12, name:"JANN BRANIN",
+    addr:"19223 W 78th Ave\nGlendale, AZ 85308",
+    phone:"9283082625", type:"Residential",
+    order:"BMT #43195007 · Order #46686083 · Zone 1A-DD",
+    product:"Daydream Bouquet-LG: LavGlsVse, RoseP...\nCard Isle Personalized Sku",
+    badges:["sun","card"], special:null,
+    flex_note:"📅 FLEX — SUN 5/10 PREFERRED · FRI 5/8–SUN 5/10 ACCEPTABLE",
+    notes_pre:"CARD ISLE ID: 8RUBR"
+  },
+  {
+    num:13, name:"GRACE MOSS",
+    addr:"Inspira Arrowhead\n20240 N 78th Ave, Apt 3213\nGlendale, AZ 85308",
+    phone:"6232786734", type:"Business",
+    order:"BMT #43046184 · Order #46651703 · Zone 1A-DD",
+    product:"Designer Dreams Bqt-LG: PkBagVse, Foa...",
+    badges:["biz","sat","time"], special:"⏰ BEFORE 5 PM · 🏢 Inspira Arrowhead — check in at front desk",
+    flex_note:"📅 FLEX — SAT 5/9 PREFERRED · FRI 5/8–SUN 5/10 ACCEPTABLE",
+    notes_pre:null
+  },
+  {
+    num:14, name:"SHAMIRAN TOMA",
+    addr:"6935 W Blackhawk Dr\nGlendale, AZ 85308",
+    phone:"8476025530", type:"Residential",
+    order:"BMT #43337350 · Order #46717274 · Zone 1A-DD",
+    product:"Spring Sentiment Bqt-SM: RstcCbe, Foa...",
+    badges:["sat"], special:null,
+    flex_note:"📅 FLEX — SAT 5/9 PREFERRED · FRI 5/8–SUN 5/10 ACCEPTABLE",
+    notes_pre:null
+  },
+  {
+    num:15, name:"VICKIE CAVEY",
+    addr:"7034 W Louise Dr\nGlendale, AZ 85310",
+    phone:"4802543613", type:"Residential",
+    order:"BMT #43369354 · Order #46722426 · Zone 1A-DD",
+    product:"Daydream Bouquet-XL: LavGlsVse, RoseP...",
+    badges:["fri"], special:"📅 DELIVER MY GIFT ON FRI 5/8 — customer requested",
+    flex_note:null, notes_pre:null
+  },
+  {
+    num:16, name:"BALAJI NATARAJAN",
+    addr:"23825 N 63rd Dr\nGlendale, AZ 85310",
+    phone:"5202698983", type:"Residential",
+    order:"BMT #43488236 · Order #46747528 · Zone 1A-DD",
     product:"Honey Bee Buzz for Spring-LG: BeeVse,...",
-    badges:[], special:null, notes_pre:null
+    badges:["mat"], special:"🤱 MATERNITY location type — may need delivery to hospital room",
+    flex_note:null, notes_pre:null
+  },
+  {
+    num:17, name:"FATMEH MUSTAFA",
+    addr:"5440 W Alameda Rd\nGlendale, AZ 85310",
+    phone:"6235707840", type:"Residential",
+    order:"BMT #43331663 · Order #46716201 · Zone 1A-DD",
+    product:"Elegant Blush Bqt-XL: 6\" Cyl, RoseWh, St...",
+    badges:["sat"], special:null,
+    flex_note:"📅 FLEX — SAT 5/9 PREFERRED · FRI 5/8–SUN 5/10 ACCEPTABLE",
+    notes_pre:null
+  },
+  {
+    num:18, name:"KRISTI BUCHANAN",
+    addr:"5114 W Alameda Rd\nGlendale, AZ 85310",
+    phone:"6023995130", type:"Residential",
+    order:"BMT #42932099 · Order #46622504 · Zone 1A-DD",
+    product:"Spring Sentiment Bqt-LG: RstcCbe, Foa...",
+    badges:["fri"], special:"📅 DELIVER MY GIFT ON FRI 5/8 — customer requested",
+    flex_note:null, notes_pre:null
+  },
+  {
+    num:19, name:"WENDY MCDONALD",
+    addr:"4633 W Soft Wind Dr\nGlendale, AZ 85310",
+    phone:"6027403364", type:"Residential",
+    order:"BMT #42912193 · Order #46618573 · Zone 1A-DD",
+    product:"Always on My Mind-XL: 8\" GthrVse, RoseP...",
+    badges:["sun"], special:null,
+    flex_note:"📅 FLEX — SUN 5/10 PREFERRED · FRI 5/8–SUN 5/10 ACCEPTABLE",
+    notes_pre:null
+  },
+  {
+    num:20, name:"HEATHER GANO",
+    addr:"24832 N 40th Ln\nGlendale, AZ 85310",
+    phone:"6023012674", type:"Residential",
+    order:"BMT #43308735 · Order #46711653 · Zone 1A-DD",
+    product:"Lovely Lavender Medley-SM: 5\" Cyl, Rose...",
+    badges:["fri"], special:"📅 DELIVER MY GIFT ON FRI 5/8 — customer requested",
+    flex_note:null, notes_pre:null
+  },
+  {
+    num:21, name:"LISA JOHNSON",
+    addr:"4032 W Questa Dr\nGlendale, AZ 85310",
+    phone:"6027411812", type:"Residential",
+    order:"BMT #42717163 · Order #46564726 · Zone 1A-DD",
+    product:"Amazing Mom-LG: LavVse, Rose Pk, StkLa...",
+    badges:["sun"], special:null,
+    flex_note:"📅 FLEX — SUN 5/10 PREFERRED · FRI 5/8–SUN 5/10 ACCEPTABLE",
+    notes_pre:null
+  },
+  {
+    num:22, name:"LINDSAY RACE",
+    addr:"Desert Sage Elementary School\n4035 W Alameda Rd\nGlendale, AZ 85310",
+    phone:"4802337414", type:"School",
+    order:"BMT #43276131 · Order #46704377 · Zone 1A-DD",
+    product:"Designer Dreams Bqt-LG: Same as PC 2...",
+    badges:["school","fri","time"], special:"⏰ DELIVER FRI 5/8 BEFORE 2 PM — School, office hours apply!",
+    flex_note:null, notes_pre:null
+  },
+  {
+    num:23, name:"DONNA FULLER",
+    addr:"3611 W Creedance Blvd\nGlendale, AZ 85310",
+    phone:"6023206010", type:"Residential",
+    order:"BMT #43486552 · Order #46746992 · Zone 1A-DD",
+    product:"Designer Dreams Bqt-MD: PkBagVse, Foa...",
+    badges:[], special:null,
+    flex_note:null, notes_pre:null
+  },
+  {
+    num:24, name:"KRISTI SISK",
+    addr:"3651 W Melinda Ln\nGlendale, AZ 85308",
+    phone:"4805213194", type:"Residential",
+    order:"BMT #43536841 · Order #46763026 · Zone 1A-DD",
+    product:"Lovely Lavender Medley-LG: 6\" Cyl, Rose...\nCard Isle Personalized Sku",
+    badges:["card"], special:null,
+    flex_note:null, notes_pre:"CARD ISLE ID: AV9RA"
+  },
+  {
+    num:25, name:"TAMI BERRINGER",
+    addr:"20619 N 36th Ave\nGlendale, AZ 85308",
+    phone:"6027690732", type:"Residential",
+    order:"FTD Order #73432S71750-7355 · HOLIDAY · Zone 1A-DD",
+    product:"#1 V7025d V7025s: Purple Paradise Bou...",
+    badges:["ftd"], special:null,
+    flex_note:null, notes_pre:"FTD NL ORDER"
   }
 ];
 
 var badgeDefs = {
-  apt:    { cls:"b-apt",   label:"🏠 APARTMENT" },
-  biz:    { cls:"b-biz",   label:"🏢 BUSINESS" },
-  time:   { cls:"b-time",  label:"⏰ BEFORE 5 PM" },
-  card:   { cls:"b-card",  label:"💌 CARD ISLE" },
-  novase: { cls:"b-novase",label:"🚫 NO VASE" },
-  dd:     { cls:"b-dd",    label:"📍 ZONE DD" }
+  apt:    {cls:"b-apt",   label:"🏠 APARTMENT"},
+  biz:    {cls:"b-biz",   label:"🏢 BUSINESS"},
+  school: {cls:"b-school",label:"🏫 SCHOOL"},
+  mat:    {cls:"b-mat",   label:"🤱 MATERNITY"},
+  time:   {cls:"b-time",  label:"⏰ TIME SENSITIVE"},
+  flex:   {cls:"b-flex",  label:"📅 FLEX"},
+  card:   {cls:"b-card",  label:"💌 CARD ISLE"},
+  ftd:    {cls:"b-ftd",   label:"💜 FTD ORDER"},
+  fri:    {cls:"b-fri",   label:"✅ DELIVER FRI 5/8"},
+  sat:    {cls:"b-sat",   label:"📅 PREF SAT 5/9"},
+  sun:    {cls:"b-sun",   label:"📅 PREF SUN 5/10"}
 };
 
-var state = {};
-stops.forEach(function(s){ state[s.num]={texted:false,outcome:null,ts:null,notes:'',reason:''}; });
+var state={};
+stops.forEach(function(s){state[s.num]={texted:false,outcome:null,ts:null,notes:'',reason:''};});
 
-function phxTime() {
-  return new Date().toLocaleTimeString('en-US',{timeZone:'America/Phoenix',hour:'numeric',minute:'2-digit',hour12:true});
-}
-function navUrl(addr) { return 'https://maps.apple.com/?q='+encodeURIComponent(addr.replace(/\n/g,', ')); }
-function updateProgress() {
-  var done=0; stops.forEach(function(s){if(state[s.num].outcome)done++;});
+function phxTime(){return new Date().toLocaleTimeString('en-US',{timeZone:'America/Phoenix',hour:'numeric',minute:'2-digit',hour12:true});}
+function navUrl(a){return 'https://maps.apple.com/?q='+encodeURIComponent(a.replace(/\n/g,', '));}
+function updateProgress(){
+  var done=0;stops.forEach(function(s){if(state[s.num].outcome)done++;});
   document.getElementById('prog').style.width=((done/stops.length)*100)+'%';
   document.getElementById('counter').textContent=done+' of '+stops.length+' complete';
 }
-function setTexted(num) {
+function setTexted(num){
   state[num].texted=true;
   document.getElementById('c'+num).classList.add('s-yellow');
   var btn=document.getElementById('tbtn'+num);
-  btn.classList.add('active'); btn.textContent='🟡 TEXTED ✓';
+  btn.classList.add('active');btn.textContent='🟡 TEXTED ✓';
   updateOtag(num);
 }
-function setOutcome(num,outcome) {
+function setOutcome(num,outcome){
   var card=document.getElementById('c'+num);
   var ts=phxTime();
-  state[num].outcome=outcome; state[num].ts=ts;
+  state[num].outcome=outcome;state[num].ts=ts;
   card.classList.remove('s-yellow','s-delivered','s-lop','s-undeliv');
   ['d','l','u'].forEach(function(x){var b=document.getElementById('obtn-'+x+'-'+num);if(b)b.classList.remove('active');});
-  var tsEl=document.getElementById('ts'+num);
-  var urEl=document.getElementById('ur'+num);
+  var tsEl=document.getElementById('ts'+num),urEl=document.getElementById('ur'+num);
   if(outcome==='delivered'){
-    card.classList.add('s-delivered'); document.getElementById('obtn-d-'+num).classList.add('active');
-    tsEl.textContent='✅ Delivered at '+ts; tsEl.className='ts-line show ts-d';
-    urEl.classList.remove('show'); setTimeout(function(){card.classList.add('collapsed');},600);
-  } else if(outcome==='lop'){
-    card.classList.add('s-lop'); document.getElementById('obtn-l-'+num).classList.add('active');
-    tsEl.textContent='🚪 Left on Porch at '+ts; tsEl.className='ts-line show ts-l';
-    urEl.classList.remove('show'); setTimeout(function(){card.classList.add('collapsed');},600);
-  } else if(outcome==='undeliv'){
-    card.classList.add('s-undeliv'); document.getElementById('obtn-u-'+num).classList.add('active');
-    tsEl.textContent='❌ Undeliverable — logged at '+ts; tsEl.className='ts-line show ts-u';
+    card.classList.add('s-delivered');document.getElementById('obtn-d-'+num).classList.add('active');
+    tsEl.textContent='✅ Delivered at '+ts;tsEl.className='ts-line show ts-d';
+    urEl.classList.remove('show');setTimeout(function(){card.classList.add('collapsed');},600);
+  }else if(outcome==='lop'){
+    card.classList.add('s-lop');document.getElementById('obtn-l-'+num).classList.add('active');
+    tsEl.textContent='🚪 Left on Porch at '+ts;tsEl.className='ts-line show ts-l';
+    urEl.classList.remove('show');setTimeout(function(){card.classList.add('collapsed');},600);
+  }else if(outcome==='undeliv'){
+    card.classList.add('s-undeliv');document.getElementById('obtn-u-'+num).classList.add('active');
+    tsEl.textContent='❌ Undeliverable — logged at '+ts;tsEl.className='ts-line show ts-u';
     urEl.classList.add('show');
   }
-  updateOtag(num); updateProgress();
+  updateOtag(num);updateProgress();
 }
-function updateOtag(num) {
-  var el=document.getElementById('otag'+num); var s=state[num];
+function updateOtag(num){
+  var el=document.getElementById('otag'+num),s=state[num];
   if(s.outcome==='delivered'){el.textContent='✅ DELIVERED';el.className='otag otag-delivered';}
   else if(s.outcome==='lop'){el.textContent='🚪 LOP';el.className='otag otag-lop';}
   else if(s.outcome==='undeliv'){el.textContent='❌ UNDELIV';el.className='otag otag-undeliv';}
@@ -275,23 +435,20 @@ function updateOtag(num) {
 function toggleCard(num){document.getElementById('c'+num).classList.toggle('collapsed');}
 function expandAll(){stops.forEach(function(s){document.getElementById('c'+s.num).classList.remove('collapsed');});}
 function collapseAll(){stops.forEach(function(s){document.getElementById('c'+s.num).classList.add('collapsed');});}
-function hideDone(){stops.forEach(function(s){var card=document.getElementById('c'+s.num);if(state[s.num].outcome)card.classList.add('collapsed');else card.classList.remove('collapsed');});}
+function hideDone(){stops.forEach(function(s){var c=document.getElementById('c'+s.num);if(state[s.num].outcome)c.classList.add('collapsed');else c.classList.remove('collapsed');});}
 function saveNotes(num){state[num].notes=document.getElementById('notes'+num).value;}
 function saveReason(num){state[num].reason=document.getElementById('ur'+num).value;}
-
-function refreshSummary() {
+function refreshSummary(){
   var groups={delivered:[],lop:[],undeliv:[],pending:[]};
-  stops.forEach(function(s){var bucket=state[s.num].outcome||'pending';groups[bucket].push({s:s,st:state[s.num]});});
+  stops.forEach(function(s){var b=state[s.num].outcome||'pending';groups[b].push({s:s,st:state[s.num]});});
   var total=stops.length,done=total-groups.pending.length;
-  document.getElementById('sum-meta').textContent=done+' of '+total+' complete  ·  '+groups.delivered.length+' delivered  ·  '+groups.lop.length+' LOP  ·  '+groups.undeliv.length+' undeliverable  ·  '+groups.pending.length+' pending';
+  document.getElementById('sum-meta').textContent=done+' of '+total+' complete · '+groups.delivered.length+' delivered · '+groups.lop.length+' LOP · '+groups.undeliv.length+' undeliverable · '+groups.pending.length+' pending';
   var html='';
-  var sections=[
-    {key:'delivered',label:'✅ DELIVERED',cls:'sg-delivered',tagCls:'st-d',tagTxt:'DELIVERED'},
-    {key:'lop',label:'🚪 LEFT ON PORCH',cls:'sg-lop',tagCls:'st-l',tagTxt:'LOP'},
-    {key:'undeliv',label:'❌ UNDELIVERABLE',cls:'sg-undeliv',tagCls:'st-u',tagTxt:'UNDELIV'},
-    {key:'pending',label:'⏳ PENDING',cls:'sg-pending',tagCls:'st-p',tagTxt:'PENDING'}
-  ];
-  sections.forEach(function(sec){
+  [{key:'delivered',label:'✅ DELIVERED',cls:'sg-delivered',tagCls:'st-d',tagTxt:'DELIVERED'},
+   {key:'lop',label:'🚪 LEFT ON PORCH',cls:'sg-lop',tagCls:'st-l',tagTxt:'LOP'},
+   {key:'undeliv',label:'❌ UNDELIVERABLE',cls:'sg-undeliv',tagCls:'st-u',tagTxt:'UNDELIV'},
+   {key:'pending',label:'⏳ PENDING',cls:'sg-pending',tagCls:'st-p',tagTxt:'PENDING'}
+  ].forEach(function(sec){
     if(!groups[sec.key].length)return;
     html+='<div class="sum-group-title '+sec.cls+'">'+sec.label+' ('+groups[sec.key].length+')</div>';
     groups[sec.key].forEach(function(item){
@@ -301,29 +458,29 @@ function refreshSummary() {
   document.getElementById('sum-body').innerHTML=html;
   document.getElementById('summary-section').scrollIntoView({behavior:'smooth'});
 }
-
-function buildCards() {
+function buildCards(){
   var wrap=document.getElementById('stops-wrap');
   stops.forEach(function(stop){
     var badgesHtml='';
     stop.badges.forEach(function(b){var bd=badgeDefs[b];badgesHtml+='<span class="badge '+bd.cls+'">'+bd.label+'</span>';});
     var specialHtml=stop.special?'<div class="special-note">'+stop.special+'</div>':'';
+    var flexHtml=stop.flex_note?'<div class="flex-note">'+stop.flex_note+'</div>':'';
     var preNoteHtml=stop.notes_pre?'<div class="info-note">ℹ️ '+stop.notes_pre+'</div>':'';
     var card=document.createElement('div');
-    card.className='card collapsed'; card.id='c'+stop.num;
+    card.className='card collapsed';card.id='c'+stop.num;
     card.innerHTML=
       '<div class="card-head" onclick="toggleCard('+stop.num+')">'+
         '<div class="stop-num">'+stop.num+'</div>'+
         '<div class="stop-info">'+
           '<div class="stop-name">'+stop.name+'</div>'+
-          '<div class="stop-sub">'+stop.type+' · '+stop.order.split('·')[2].trim()+'</div>'+
+          '<div class="stop-sub">'+stop.type+' · Zone 1A-DD</div>'+
         '</div>'+
         '<span class="otag" id="otag'+stop.num+'"></span>'+
         '<div class="chev">▼</div>'+
       '</div>'+
       '<div class="card-body">'+
         (badgesHtml?'<div class="badges">'+badgesHtml+'</div>':'')+
-        specialHtml+preNoteHtml+
+        specialHtml+flexHtml+preNoteHtml+
         '<div class="addr">'+stop.addr+'</div>'+
         '<div class="order-line">'+stop.order+'</div>'+
         '<div class="product-box">'+stop.product+'</div>'+
@@ -343,15 +500,13 @@ function buildCards() {
         '</div>'+
         '<div class="ts-line" id="ts'+stop.num+'"></div>'+
         '<div class="notes-label">NOTES / GATE CODE / RESPONSE</div>'+
-        '<textarea class="notes-in" id="notes'+stop.num+'" rows="2" placeholder="Gate code, unit #, directions..." oninput="saveNotes('+stop.num+')"></textarea>'+
+        '<textarea class="notes-in" id="notes'+stop.num+'" rows="2" placeholder="Gate code, apt #, directions, recipient response..." oninput="saveNotes('+stop.num+')"></textarea>'+
         '<textarea class="undeliv-in" id="ur'+stop.num+'" rows="2" placeholder="Reason undeliverable..." oninput="saveReason('+stop.num+')"></textarea>'+
       '</div>';
     wrap.appendChild(card);
   });
 }
-
-buildCards();
-updateProgress();
+buildCards();updateProgress();
 </script>
 </body>
 </html>
